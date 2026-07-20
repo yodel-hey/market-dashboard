@@ -1,37 +1,37 @@
 {
-  "generated_at": "2026-07-20T18:06:05.130098+00:00",
+  "generated_at": "2026-07-20T18:10:46.870973+00:00",
   "prices": {
     "SPY": {
-      "price": 744.719970703125,
-      "changePercent": 0.19238691736115998
+      "price": 744.9000244140625,
+      "changePercent": 0.21661080255538176
     },
     "QQQ": {
-      "price": 700.385009765625,
-      "changePercent": 0.7269918673923857
+      "price": 701.0,
+      "changePercent": 0.8154376728746388
     },
     "XLK": {
-      "price": 177.19000244140625,
-      "changePercent": 0.9112171176521399
+      "price": 177.4199981689453,
+      "changePercent": 1.042201645436102
     },
     "XLF": {
-      "price": 56.1422004699707,
-      "changePercent": -0.20938118570368586
+      "price": 56.099998474121094,
+      "changePercent": -0.28439362279694613
     },
     "XLE": {
-      "price": 58.290000915527344,
-      "changePercent": 1.0575599984815283
+      "price": 58.21500015258789,
+      "changePercent": 0.9275309372078877
     },
     "^GSPC": {
-      "price": 7473.16015625,
-      "changePercent": 0.20743976975842038
+      "price": 7474.64013671875,
+      "changePercent": 0.22728479523384165
     },
     "^NDX": {
-      "price": 28798.6171875,
-      "changePercent": 0.7203143398498386
+      "price": 28817.46875,
+      "changePercent": 0.7862458145604184
     },
     "^DJI": {
-      "price": 51991.05859375,
-      "changePercent": -0.2979366093850519
+      "price": 51985.421875,
+      "changePercent": -0.3087460159508787
     },
     "^N225": {
       "price": 64141.12109375,
@@ -50,51 +50,51 @@
       "changePercent": 0.06326364919327244
     },
     "^VIX": {
-      "price": 18.09000015258789,
-      "changePercent": -3.622803881683011
+      "price": 18.059999465942383,
+      "changePercent": -3.782637051176083
     },
     "^VVIX": {
-      "price": 101.98999786376953,
-      "changePercent": -2.746261855043545
+      "price": 101.93000030517578,
+      "changePercent": -2.803473218657918
     },
     "DX-Y.NYB": {
-      "price": 100.9520034790039,
+      "price": 100.95500183105469,
       "changePercent": null
     },
     "ES=F": {
-      "price": 7509.0,
+      "price": 7512.25,
       "changePercent": null
     },
     "NQ=F": {
-      "price": 28964.5,
+      "price": 28974.0,
       "changePercent": null
     },
     "YM=F": {
-      "price": 52169.0,
+      "price": 52202.0,
       "changePercent": null
     },
     "NKD=F": {
-      "price": 65610.0,
+      "price": 65595.0,
       "changePercent": null
     },
     "6E=F": {
-      "price": 1.1440500020980835,
+      "price": 1.1440000534057617,
       "changePercent": null
     },
     "ZN=F": {
-      "price": 108.84375,
+      "price": 108.859375,
       "changePercent": null
     },
     "GC=F": {
-      "price": 4008.800048828125,
+      "price": 4011.300048828125,
       "changePercent": null
     },
     "CL=F": {
-      "price": 82.05000305175781,
+      "price": 82.0999984741211,
       "changePercent": null
     },
     "BTC=F": {
-      "price": 65630.0,
+      "price": 65715.0,
       "changePercent": null
     }
   },
@@ -115,44 +115,44 @@
   },
   "indicators": {
     "cpi_index": {
-      "value": 324.245,
-      "date": "2025-09-01"
+      "value": 332.568,
+      "date": "2026-06-01"
     },
     "inflation_expectation": {
-      "value": 2.27,
-      "date": "2025-10-17"
+      "value": 2.24,
+      "date": "2026-07-17"
     },
     "fed_funds_rate": {
-      "value": 4.09,
-      "date": "2025-10-01"
+      "value": 3.63,
+      "date": "2026-06-01"
     },
     "retail_sales": {
-      "value": 631346,
-      "date": "2025-10-01"
+      "value": 666056,
+      "date": "2026-06-01"
     },
     "durable_goods": {
-      "value": 307570,
-      "date": "2025-10-01"
+      "value": 332218,
+      "date": "2026-05-01"
     },
     "unemployment_rate": {
-      "value": 4.4,
-      "date": "2025-09-01"
+      "value": 4.2,
+      "date": "2026-06-01"
     },
     "nonfarm_payroll": {
-      "value": 158408,
-      "date": "2025-10-01"
+      "value": 158984,
+      "date": "2026-06-01"
     },
     "initial_claims": {
-      "value": 231000,
-      "date": "2025-10-18"
+      "value": 208000,
+      "date": "2026-07-11"
     },
     "housing_starts": {
-      "value": 1273,
-      "date": "2025-10-01"
+      "value": 1427,
+      "date": "2026-06-01"
     },
     "real_gdp": {
-      "value": 24055.749,
-      "date": "2025-10-01"
+      "value": 24180.419,
+      "date": "2026-01-01"
     }
   },
   "fred_indicators": {
@@ -191,25 +191,25 @@
   },
   "calculated": {
     "spread_2s10s_bps": 37,
-    "real_10y_rate": 2.28
+    "real_10y_rate": 2.31
   },
   "_errors": [
     "fmp_calendar: failed after 3 attempts - 402 Client Error: Payment Required for url: https://financialmodelingprep.com/stable/economic-calendar?from=2026-05-21&to=2026-07-20&apikey=1sl3QShloEyZsFLZrVplMtbH5zdMmLUx",
     "gdpnow: FMP calendar had no value, falling back to FRED",
     "ism_manufacturing_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_ism_manufacturing_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_ism_manufacturing_pmi: no usable value found in the research agent's response stream",
+    "bigdata_ism_manufacturing_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571069-1c535da5-61c0-4b37-91e4-93c512883c55\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_80a5b676\",\"content\":\"**My Thought Process for Retrieving the Latest ISM Manufacturing PMI**\\n\\nMy primary objective here is quite specific: I need to find the most recent ISM Manufacturing Purchasing Managers' Index (PMI) value, and I need it presented as a simple, plain numerical figure.\\n\\nTo accomplish this, my first step is to devise a search strategy. I k",
     "ism_services_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_ism_services_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_ism_services_pmi: no usable value found in the research agent's response stream",
+    "bigdata_ism_services_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571081-80958c13-52b1-4a8b-98be-6b5bc704379b\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_340414d7\",\"content\":\"**My Thought Process for Retrieving the Latest ISM Services PMI**\\n\\nMy primary objective here is to fulfill your request for the most recent ISM Services PMI value. As you're an expert in your field, I understand the importance of providing accurate and up-to-the-minute data.\\n\\nMy initial thought is to **Search** for the information. I k",
     "sp_global_composite_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_sp_global_composite_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_sp_global_composite_pmi: no usable value found in the research agent's response stream",
+    "bigdata_sp_global_composite_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571095-66a5f093-decc-4eb4-bed6-92f1398e42bd\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_429b7612\",\"content\":\"**My Thought Process for Retrieving the Latest S&P Global US Composite PMI**\\n\\nMy primary objective here is to extract a single, numerical data point: the most recent S&P Global US Composite PMI value. The request specifies a \\\"plain number,\\\" implying no accompanying text or context, just the figure itself.\\n\\nTo accomplish this, my inte",
     "sp_global_manufacturing_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_sp_global_manufacturing_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_sp_global_manufacturing_pmi: no usable value found in the research agent's response stream",
+    "bigdata_sp_global_manufacturing_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571112-e8651314-fcfa-4986-9e88-005a0b100097\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_504df609\",\"content\":\"**My Thought Process for Retrieving the Latest S&P Global US Manufacturing PMI**\\n\\nMy primary objective here is to deliver a singular, numerical data point: the most recent S&P Global US Manufacturing PMI value. I understand the user, as an expert in their domain, needs this information concisely and without embellishment.\\n\\nTo achieve t",
     "sp_global_services_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_sp_global_services_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_sp_global_services_pmi: no usable value found in the research agent's response stream"
+    "bigdata_sp_global_services_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571127-9c31005e-d44d-42af-af69-c966757f73b1\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_b404289d\",\"content\":\"**My Thought Process for Retrieving the Latest S&P Global US Services PMI**\\n\\nAlright, my primary objective here is straightforward: I need to get my hands on the most current S&P Global US Services PMI figure and present it as a simple, unadorned numerical value. My internal directive is clear.\\n\\nHere's how I'm going to break down this "
   ]
 }
