@@ -3,9 +3,12 @@
 fetch_market_data.py
 
 Runs hourly via GitHub Actions (cron in UTC). Only does real work when the
-current time in America/Chicago falls inside the user's configured window
-(14:00-22:00 CT), so the timezone/DST handling is correct year-round without
-ever touching the cron file.
+current time in America/Chicago (CT) falls inside the configured window
+(07:00-15:00 CT), so the timezone/DST handling is correct year-round without
+ever touching the cron file. This window is the real-world equivalent of the
+user's original 14:00-22:00 Europe/Berlin preference, expressed directly in
+CT per their final choice - see the ACTIVE_TZ block below for the accepted
+~3-week/year edge case this implies around US/EU DST transition dates.
 
 Data sources (all decided and verified live during planning, 2026-07-20):
   - FMP            -> prices, indices, commodities, treasury yields,
@@ -54,11 +57,19 @@ FMP_BASE = "https://financialmodelingprep.com/stable"
 FRED_BASE = "https://api.stlouisfed.org/fred/series/observations"
 BIGDATA_RESEARCH_BASE = "https://api.bigdata.com/v1"  # research/chat endpoint - see fetch_gdpnow_bigdata()
 
-# Active window: only fetch during these local hours (America/Chicago).
+# Active window: only fetch during these local hours in America/Chicago (CT).
+# This is the same real-world window as the user's original 14:00-22:00
+# Europe/Berlin time - just expressed directly in CT per their preference.
+# Known, accepted tradeoff: US and EU daylight-saving transitions don't land
+# on the same calendar day (~3 weeks/year mismatch, e.g. mid-March and late
+# October 2026). During those weeks this window drifts by 1 hour relative to
+# 14:00-22:00 Berlin time. Since the window is now anchored to CT itself
+# (not computed as a Berlin-equivalent), this isn't a bug - it's just always
+# exactly 07:00-15:00 CT, correctly handled by zoneinfo's own DST rules.
 # Cron itself runs hourly in UTC year-round; this check makes the DST
 # handling automatic instead of needing the workflow file edited twice a year.
-ACTIVE_HOUR_START = 14
-ACTIVE_HOUR_END = 22  # inclusive
+ACTIVE_HOUR_START = 7
+ACTIVE_HOUR_END = 15  # inclusive
 ACTIVE_TZ = ZoneInfo("America/Chicago")
 
 OUTPUT_PATH = os.environ.get("OUTPUT_PATH", "data.json")
