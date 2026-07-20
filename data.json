@@ -1,37 +1,37 @@
 {
-  "generated_at": "2026-07-20T18:10:46.870973+00:00",
+  "generated_at": "2026-07-20T18:15:12.402387+00:00",
   "prices": {
     "SPY": {
-      "price": 744.9000244140625,
-      "changePercent": 0.21661080255538176
+      "price": 745.02001953125,
+      "changePercent": 0.23275458502719193
     },
     "QQQ": {
-      "price": 701.0,
-      "changePercent": 0.8154376728746388
+      "price": 700.9299926757812,
+      "changePercent": 0.8053694574232548
     },
     "XLK": {
-      "price": 177.4199981689453,
-      "changePercent": 1.042201645436102
+      "price": 177.36000061035156,
+      "changePercent": 1.0080325242759787
     },
     "XLF": {
-      "price": 56.099998474121094,
-      "changePercent": -0.28439362279694613
+      "price": 56.154998779296875,
+      "changePercent": -0.1866326792906073
     },
     "XLE": {
-      "price": 58.21500015258789,
-      "changePercent": 0.9275309372078877
+      "price": 58.23500061035156,
+      "changePercent": 0.962205794451044
     },
     "^GSPC": {
-      "price": 7474.64013671875,
-      "changePercent": 0.22728479523384165
+      "price": 7476.02001953125,
+      "changePercent": 0.24578761344352176
     },
     "^NDX": {
-      "price": 28817.46875,
-      "changePercent": 0.7862458145604184
+      "price": 28817.884765625,
+      "changePercent": 0.7877007880491621
     },
     "^DJI": {
-      "price": 51985.421875,
-      "changePercent": -0.3087460159508787
+      "price": 52004.62109375,
+      "changePercent": -0.2719281134761463
     },
     "^N225": {
       "price": 64141.12109375,
@@ -50,51 +50,51 @@
       "changePercent": 0.06326364919327244
     },
     "^VIX": {
-      "price": 18.059999465942383,
-      "changePercent": -3.782637051176083
+      "price": 18.020000457763672,
+      "changePercent": -3.9957377821468514
     },
     "^VVIX": {
       "price": 101.93000030517578,
       "changePercent": -2.803473218657918
     },
     "DX-Y.NYB": {
-      "price": 100.95500183105469,
+      "price": 100.95099639892578,
       "changePercent": null
     },
     "ES=F": {
-      "price": 7512.25,
+      "price": 7511.75,
       "changePercent": null
     },
     "NQ=F": {
-      "price": 28974.0,
+      "price": 28973.25,
       "changePercent": null
     },
     "YM=F": {
-      "price": 52202.0,
+      "price": 52207.0,
       "changePercent": null
     },
     "NKD=F": {
-      "price": 65595.0,
+      "price": 65615.0,
       "changePercent": null
     },
     "6E=F": {
-      "price": 1.1440000534057617,
+      "price": 1.1440999507904053,
       "changePercent": null
     },
     "ZN=F": {
-      "price": 108.859375,
+      "price": 108.84375,
       "changePercent": null
     },
     "GC=F": {
-      "price": 4011.300048828125,
+      "price": 4012.300048828125,
       "changePercent": null
     },
     "CL=F": {
-      "price": 82.0999984741211,
+      "price": 82.06999969482422,
       "changePercent": null
     },
     "BTC=F": {
-      "price": 65715.0,
+      "price": 65730.0,
       "changePercent": null
     }
   },
@@ -198,18 +198,18 @@
     "gdpnow: FMP calendar had no value, falling back to FRED",
     "ism_manufacturing_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_ism_manufacturing_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_ism_manufacturing_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571069-1c535da5-61c0-4b37-91e4-93c512883c55\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_80a5b676\",\"content\":\"**My Thought Process for Retrieving the Latest ISM Manufacturing PMI**\\n\\nMy primary objective here is quite specific: I need to find the most recent ISM Manufacturing Purchasing Managers' Index (PMI) value, and I need it presented as a simple, plain numerical figure.\\n\\nTo accomplish this, my first step is to devise a search strategy. I k",
+    "bigdata_ism_manufacturing_pmi: no usable value found - 10 lines total, types seen: ['THINKING', 'ACTION', 'AUDIT', 'THINKING', 'THINKING', 'ANSWER', 'STRUCTURED_OUTPUT', 'GROUNDING', 'COMPLETE'] - tail: data: {\"chat_id\":\"1784571337-93a89b8d-b0d9-4c31-acc3-6d0b51b131ad\",\"message\":{\"role\":\"assistant\",\"type\":\"STRUCTURED_OUTPUT\",\"message_id\":\"structured_output_fdb5c72e\",\"json_schema\":{\"type\":\"object\",\"properties\":{\"value\":{\"type\":\"number\"}},\"required\":[\"value\"]},\"content\":{\"value\":53.3}}} | data: {\"chat_id\":\"1784571337-93a89b8d-b0d9-4c31-acc3-6d0b51b131ad\",\"message\":{\"role\":\"assistant\",\"type\":\"GROUNDING\",\"message_id\":\"answer_ee12229d\",\"references\":[{\"start\":5,\"end\":5,\"source\":{\"type\":\"BIGDATA\",\"document_scope\":\"news\",\"hd\":\"Manufacturing PMI\u00ae at 53.3%; June 2026 ISM\u00ae Manufacturing PMI\u00ae Report\",\"id\":\"B68E325EE7A1653F9C41144F6D3642CC\",\"language\":\"English\",\"chunks\":[{\"id\":\"B68E325EE7A1653F9C41144F6D3642CC-1\",\"cnum\":1,\"text\":\"New Orders Growing; Production Growing; Employment Contracting; Supplier",
     "ism_services_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_ism_services_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_ism_services_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571081-80958c13-52b1-4a8b-98be-6b5bc704379b\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_340414d7\",\"content\":\"**My Thought Process for Retrieving the Latest ISM Services PMI**\\n\\nMy primary objective here is to fulfill your request for the most recent ISM Services PMI value. As you're an expert in your field, I understand the importance of providing accurate and up-to-the-minute data.\\n\\nMy initial thought is to **Search** for the information. I k",
+    "bigdata_ism_services_pmi: no usable value found - 8 lines total, types seen: ['THINKING', 'ACTION', 'AUDIT', 'THINKING', 'ANSWER', 'STRUCTURED_OUTPUT', 'GROUNDING', 'COMPLETE'] - tail: data: {\"chat_id\":\"1784571354-50c25758-1678-44a4-97e3-994785964442\",\"message\":{\"role\":\"assistant\",\"type\":\"STRUCTURED_OUTPUT\",\"message_id\":\"structured_output_ea1dde34\",\"json_schema\":{\"type\":\"object\",\"properties\":{\"value\":{\"type\":\"number\"}},\"required\":[\"value\"]},\"content\":{\"value\":54}}} | data: {\"chat_id\":\"1784571354-50c25758-1678-44a4-97e3-994785964442\",\"message\":{\"role\":\"assistant\",\"type\":\"GROUNDING\",\"message_id\":\"answer_670fde5c\",\"references\":[{\"start\":3,\"end\":3,\"source\":{\"type\":\"BIGDATA\",\"document_scope\":\"news\",\"hd\":\"Services PMI\u00ae at 54%; June 2026 ISM\u00ae Services PMI\u00ae Report\",\"id\":\"1B6871E5A76FE3E96944CED19EB99578\",\"language\":\"English\",\"chunks\":[{\"id\":\"1B6871E5A76FE3E96944CED19EB99578-1\",\"cnum\":1,\"text\":\"Business Activity Index at 55.4%; New Orders Index at 55.1%; Employment Index at 51.2%",
     "sp_global_composite_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_sp_global_composite_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_sp_global_composite_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571095-66a5f093-decc-4eb4-bed6-92f1398e42bd\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_429b7612\",\"content\":\"**My Thought Process for Retrieving the Latest S&P Global US Composite PMI**\\n\\nMy primary objective here is to extract a single, numerical data point: the most recent S&P Global US Composite PMI value. The request specifies a \\\"plain number,\\\" implying no accompanying text or context, just the figure itself.\\n\\nTo accomplish this, my inte",
+    "bigdata_sp_global_composite_pmi: no usable value found - 10 lines total, types seen: ['THINKING', 'ACTION', 'AUDIT', 'THINKING', 'THINKING', 'ANSWER', 'STRUCTURED_OUTPUT', 'GROUNDING', 'COMPLETE'] - tail: data: {\"chat_id\":\"1784571369-5051221b-4de2-42cf-ac58-643b4781d74d\",\"message\":{\"role\":\"assistant\",\"type\":\"STRUCTURED_OUTPUT\",\"message_id\":\"structured_output_2f1e986b\",\"json_schema\":{\"type\":\"object\",\"properties\":{\"value\":{\"type\":\"number\"}},\"required\":[\"value\"]},\"content\":{\"value\":51.9}}} | data: {\"chat_id\":\"1784571369-5051221b-4de2-42cf-ac58-643b4781d74d\",\"message\":{\"role\":\"assistant\",\"type\":\"GROUNDING\",\"message_id\":\"answer_ff8d48e8\",\"references\":[{\"start\":5,\"end\":5,\"source\":{\"type\":\"BIGDATA\",\"document_scope\":\"news\",\"hd\":\"SA BRIEFING: Top 40 futures higher despite new US airstrikes on Iran\",\"id\":\"14403F54FA2E5027856DB5CCEA489341\",\"language\":\"English\",\"chunks\":[{\"id\":\"14403F54FA2E5027856DB5CCEA489341-24\",\"cnum\":24,\"text\":\"FRIDAY: US data is thin on the ground in the week ahead, putting some f",
     "sp_global_manufacturing_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_sp_global_manufacturing_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_sp_global_manufacturing_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571112-e8651314-fcfa-4986-9e88-005a0b100097\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_504df609\",\"content\":\"**My Thought Process for Retrieving the Latest S&P Global US Manufacturing PMI**\\n\\nMy primary objective here is to deliver a singular, numerical data point: the most recent S&P Global US Manufacturing PMI value. I understand the user, as an expert in their domain, needs this information concisely and without embellishment.\\n\\nTo achieve t",
+    "bigdata_sp_global_manufacturing_pmi: no usable value found - 10 lines total, types seen: ['THINKING', 'ACTION', 'AUDIT', 'THINKING', 'THINKING', 'ANSWER', 'ANSWER', 'STRUCTURED_OUTPUT', 'GROUNDING', 'COMPLETE'] - tail: data: {\"chat_id\":\"1784571388-8757d528-839c-4ee5-ae24-b1a6a9305263\",\"message\":{\"role\":\"assistant\",\"type\":\"STRUCTURED_OUTPUT\",\"message_id\":\"structured_output_a1a40ec1\",\"json_schema\":{\"type\":\"object\",\"properties\":{\"value\":{\"type\":\"number\"}},\"required\":[\"value\"]},\"content\":{\"value\":53.9}}} | data: {\"chat_id\":\"1784571388-8757d528-839c-4ee5-ae24-b1a6a9305263\",\"message\":{\"role\":\"assistant\",\"type\":\"GROUNDING\",\"message_id\":\"answer_dd265c93\",\"references\":[{\"start\":101,\"end\":101,\"source\":{\"type\":\"BIGDATA\",\"document_scope\":\"news\",\"hd\":\"S&P Global US Final Manufacturing PMI Revised Downward in June, Below May Reading\",\"id\":\"5F85E9FE5723C5EE783B1AAE9B4653C0\",\"language\":\"English\",\"chunks\":[{\"id\":\"5F85E9FE5723C5EE783B1AAE9B4653C0-1\",\"cnum\":1,\"text\":\"09:56 AM EDT, 07/01/2026 (MT Newswires) -- The S&P Globa",
     "sp_global_services_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_sp_global_services_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
-    "bigdata_sp_global_services_pmi: no usable value found - raw stream preview: data: {\"chat_id\":\"1784571127-9c31005e-d44d-42af-af69-c966757f73b1\",\"message\":{\"role\":\"assistant\",\"type\":\"THINKING\",\"message_id\":\"thinking_b404289d\",\"content\":\"**My Thought Process for Retrieving the Latest S&P Global US Services PMI**\\n\\nAlright, my primary objective here is straightforward: I need to get my hands on the most current S&P Global US Services PMI figure and present it as a simple, unadorned numerical value. My internal directive is clear.\\n\\nHere's how I'm going to break down this "
+    "bigdata_sp_global_services_pmi: no usable value found - 10 lines total, types seen: ['THINKING', 'ACTION', 'AUDIT', 'THINKING', 'THINKING', 'ANSWER', 'ANSWER', 'STRUCTURED_OUTPUT', 'GROUNDING', 'COMPLETE'] - tail: data: {\"chat_id\":\"1784571401-d8a8bf17-06e6-473f-82e3-14665060d10f\",\"message\":{\"role\":\"assistant\",\"type\":\"STRUCTURED_OUTPUT\",\"message_id\":\"structured_output_83cd5bf0\",\"json_schema\":{\"type\":\"object\",\"properties\":{\"value\":{\"type\":\"number\"}},\"required\":[\"value\"]},\"content\":{\"value\":51.2}}} | data: {\"chat_id\":\"1784571401-d8a8bf17-06e6-473f-82e3-14665060d10f\",\"message\":{\"role\":\"assistant\",\"type\":\"GROUNDING\",\"message_id\":\"answer_6431654e\",\"references\":[{\"start\":5,\"end\":5,\"source\":{\"type\":\"BIGDATA\",\"document_scope\":\"news\",\"hd\":\"S&P Global June Final Services PMI Revised Down, Still Above May Index\",\"id\":\"A638E0204FA27E7A592E223F2DBC88F9\",\"language\":\"English\",\"chunks\":[{\"id\":\"A638E0204FA27E7A592E223F2DBC88F9-1\",\"cnum\":1,\"text\":\"09:56 AM EDT, 07/06/2026 (MT Newswires) -- The S&P Global US services i"
   ]
 }
