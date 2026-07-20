@@ -10,20 +10,30 @@ user's original 14:00-22:00 Europe/Berlin preference, expressed directly in
 CT per their final choice - see the ACTIVE_TZ block below for the accepted
 ~3-week/year edge case this implies around US/EU DST transition dates.
 
-Data sources (all decided and verified live during planning, 2026-07-20):
-  - FMP            -> prices, indices, commodities, treasury yields,
-                       clean economic indicators, and the economic calendar
-                       (for PPI/PMI/GDPNow, which have no clean indicator name).
-  - yfinance        -> real futures contracts (ES=F, NQ=F, ...) that only
-                       exist under Yahoo's own ticker convention.
-  - FRED            -> fallback ONLY for GDPNow, if FMP's calendar doesn't
-                       have it for the current quarter yet. NEVER live-tested
-                       from the build sandbox (no network route there) -
-                       first real run in Actions is the first real test.
+Data sources (revised 2026-07-20 after the first real Actions run exposed
+FMP plan-tier limits - see inline notes at each config block for specifics):
+  - FMP            -> only treasury yields and the economic-indicators
+                       endpoint (CPI level, inflation expectation, fed funds,
+                       retail sales, durable goods, unemployment, nonfarm
+                       payroll, initial claims, housing starts, real GDP).
+                       batch-quote and economic-calendar both return 402 on
+                       this FMP plan - kept in the code (calendar attempt for
+                       PMI/GDPNow) since they cost nothing extra and would
+                       start working automatically on a higher plan.
+  - yfinance        -> ALL prices: stocks/ETFs, cash indices, AND real
+                       futures contracts. No API key or plan needed, and
+                       proved 100% reliable in the first real run.
+  - FRED            -> PPI, average hourly earnings, building permits, PCE
+                       (+ core), and GDPNow. All confirmed to exist via
+                       FRED's own site search; the API itself was first
+                       exercised for real in GitHub Actions.
   - Bigdata.com     -> last-resort fallback ONLY for GDPNow, via the
                        Research Agent (natural-language answer, regex-parsed).
                        Fragile by design - only reached if FMP AND FRED
                        both fail. Logged loudly when it fires.
+  - No source found -> ISM/S&P Global PMI. FRED stopped receiving free ISM
+                       data years ago; FMP's calendar would have it but is
+                       paywalled on this plan. Accepted gap for now.
 
 Every external call is wrapped with retries/backoff so a single rate-limited
 or flaky call doesn't kill the whole run - failures are logged into the
@@ -74,15 +84,36 @@ ACTIVE_TZ = ZoneInfo("America/Chicago")
 
 OUTPUT_PATH = os.environ.get("OUTPUT_PATH", "data.json")
 
-# Symbols, per the final table worked out during planning.
-# GCUSD folds into the same batch-quote call as everything else - the
-# generic /quote endpoint was verified live to handle commodities fine,
-# so there's no need for the separate (and untested) batch-commodity-quotes
-# endpoint with its uncertain parameter support.
-FMP_PRICE_SYMBOLS = ["SPY", "QQQ", "XLK", "XLF", "XLE", "GCUSD"]
-FMP_INDEX_SYMBOLS = ["^GSPC", "^NDX", "^DJI", "^N225", "^HSI", "^STOXX50E", "^GDAXI", "^VIX", "DX-Y.NYB"]
+# All prices/indices/futures via yfinance now (2026-07-20 revision): the
+# real first Actions run showed FMP's batch-quote AND economic-calendar both
+# return 402 Payment Required on the user's actual FMP plan (my own MCP
+# testing during planning used a different, better-provisioned FMP account -
+# it proved the endpoints exist, not that this plan can reach them).
+# yfinance needs no API key/plan at all and proved 100% reliable in that same
+# real run (all 10 futures tickers worked, including ^VVIX and BTC=F which
+# were never verifiable from the build sandbox). So: stocks, cash indices,
+# and real futures all move to yfinance; FMP is kept only for what actually
+# works on this plan (treasury-rates, economic-indicators).
+YF_SYMBOLS = [
+    # stocks/ETFs
+    "SPY", "QQQ", "XLK", "XLF", "XLE",
+    # cash indices (same tickers work on Yahoo as they did on FMP)
+    "^GSPC", "^NDX", "^DJI", "^N225", "^HSI", "^STOXX50E", "^GDAXI", "^VIX", "^VVIX", "DX-Y.NYB",
+    # real futures (Yahoo-only ticker convention, no FMP equivalent)
+    "ES=F", "NQ=F", "YM=F", "NKD=F", "6E=F", "ZN=F", "GC=F", "CL=F", "BTC=F",
+]
 
-YF_FUTURES_SYMBOLS = ["ES=F", "NQ=F", "YM=F", "NKD=F", "6E=F", "ZN=F", "GC=F", "CL=F", "BTC=F", "^VVIX"]
+# FRED series added 2026-07-20 to replace the macro indicators that were
+# only reachable via FMP's paywalled economic-calendar. All four series IDs
+# verified live against fred.stlouisfed.org search (not yet tested against
+# the live FRED API itself - same caveat as the GDPNow series below).
+FRED_SERIES = {
+    "ppi": "PPIFIS",  # Producer Price Index by Commodity: Final Demand
+    "average_hourly_earnings": "CES0500000003",  # Average Hourly Earnings of All Employees, Total Private
+    "building_permits": "PERMIT",  # New Privately-Owned Housing Units Authorized, Total
+    "pce_price_index": "PCEPI",  # PCE Chain-type Price Index
+    "core_pce_price_index": "PCEPILFE",  # PCE excluding Food and Energy
+}
 
 # FMP economics-indicators: exact valid `name` values per FMP's own docs
 # (site.financialmodelingprep.com/developer/docs/stable/economics-indicators)
@@ -99,26 +130,25 @@ FMP_INDICATOR_NAMES = {
     "real_gdp": "realGDP",
 }
 
-# FMP economics-calendar: these have NO clean indicator name, only appear as
-# calendar events. Matched by the event name's prefix (before " (Mon)").
-# Verified live against a real calendar pull on 2026-07-20.
+# FMP economics-calendar: trimmed 2026-07-20 to only what has no alternative
+# source anywhere else. Everything that used to live here (PPI, CPI YoY, PCE,
+# Average Hourly Earnings, Building Permits, Durable Goods) is now covered by
+# FRED_SERIES or FMP_INDICATOR_NAMES instead. What's left:
+#   - PMI variants: confirmed via live FRED search that ISM no longer
+#     distributes this data freely (0 results) - this call is the only
+#     remaining attempt, kept in case the user's FMP plan changes.
+#   - GDPNow: kept as the primary attempt in the FMP->FRED->Bigdata chain,
+#     even though it currently 402s on this plan - costs nothing to keep
+#     trying, and it'll start working automatically if the plan is upgraded.
+# Currently this whole call 402s on the user's FMP plan, so in practice every
+# key below resolves via the "no calendar event found" error path - that's
+# expected and harmless, not a bug.
 FMP_CALENDAR_EVENTS = {
-    "ppi_yoy": "Producer Price Index (YoY)",
-    "ppi_mom": "Producer Price Index (MoM)",
-    "core_ppi_yoy": "Producer Price Index ex Food, Energy and Trade YoY",
-    "cpi_yoy": "Consumer Price Index (YoY)",
-    "core_cpi_yoy": "Consumer Price Index ex Food & Energy (YoY)",
-    "pce_yoy": "Personal Consumption Expenditures - Price Index (YoY)",
-    "core_pce_yoy": "Core Personal Consumption Expenditures - Price Index (YoY)",
     "ism_manufacturing_pmi": "ISM Manufacturing PMI",
     "ism_services_pmi": "ISM Services PMI",
     "sp_global_composite_pmi": "S&P Global Composite PMI",
     "sp_global_manufacturing_pmi": "S&P Global Manufacturing PMI",
     "sp_global_services_pmi": "S&P Global Services PMI",
-    "average_hourly_earnings_mom": "Average Hourly Earnings (MoM)",
-    "average_hourly_earnings_yoy": "Average Hourly Earnings (YoY)",
-    "building_permits": "Building Permits",
-    "durable_goods_orders": "Durable Goods Orders",
     "gdpnow": "Atlanta Fed GDPNow",
 }
 
@@ -191,14 +221,6 @@ def fmp_get(path, params, errors_log, label):
     return request_with_retry("GET", f"{FMP_BASE}/{path}", errors_log, label, params=params)
 
 
-def fetch_fmp_prices(errors_log):
-    symbols = ",".join(FMP_PRICE_SYMBOLS + FMP_INDEX_SYMBOLS)
-    data = fmp_get("batch-quote", {"symbols": symbols}, errors_log, "fmp_prices")
-    if not data:
-        return {}
-    return {row["symbol"]: {"price": row.get("price"), "changePercent": row.get("changePercentage")} for row in data}
-
-
 def fetch_fmp_treasury_rates(errors_log):
     today = date.today()
     week_ago = today - timedelta(days=7)
@@ -256,12 +278,12 @@ def fetch_fmp_calendar_events(errors_log):
 # yfinance fetcher
 # ---------------------------------------------------------------------------
 
-def fetch_yfinance_futures(errors_log):
+def fetch_yfinance_symbols(errors_log):
     if yf is None:
         errors_log.append("yfinance: package not installed")
         return {}
     results = {}
-    for symbol in YF_FUTURES_SYMBOLS:
+    for symbol in YF_SYMBOLS:
         try:
             ticker = yf.Ticker(symbol)
             hist = ticker.history(period="2d")
@@ -283,26 +305,47 @@ def fetch_yfinance_futures(errors_log):
 # GDPNow: FMP primary -> FRED fallback -> Bigdata Research Agent last resort
 # ---------------------------------------------------------------------------
 
-def fetch_gdpnow_fred(errors_log):
+def fetch_fred_series(series_id, errors_log, label):
+    """
+    Generic single-series fetch against FRED's observations endpoint.
+    Returns the most recent observation as {"value": float, "date": str}, or
+    None on any failure (missing key, network error, or unparseable response).
+    NOTE: FRED has never been reachable from the build sandbox (no network
+    route there) - every series here was verified to exist via FRED's own
+    website search, but the API call itself was first tested for real in
+    GitHub Actions, not by me during planning.
+    """
     if not FRED_API_KEY:
-        errors_log.append("fred_gdpnow: FRED_API_KEY not set, skipping")
+        errors_log.append(f"{label}: FRED_API_KEY not set, skipping")
         return None
     params = {
-        "series_id": "GDPNOW",
+        "series_id": series_id,
         "api_key": FRED_API_KEY,
         "file_type": "json",
         "sort_order": "desc",
         "limit": 1,
     }
-    data = request_with_retry("GET", FRED_BASE, errors_log, "fred_gdpnow", params=params)
+    data = request_with_retry("GET", FRED_BASE, errors_log, label, params=params)
     if not data:
         return None
     try:
         obs = data["observations"][0]
-        return {"value": float(obs["value"]), "date": obs["date"], "source": "FRED"}
+        return {"value": float(obs["value"]), "date": obs["date"]}
     except (KeyError, IndexError, ValueError) as exc:
-        errors_log.append(f"fred_gdpnow: unexpected response shape - {exc}")
+        errors_log.append(f"{label}: unexpected response shape - {exc}")
         return None
+
+
+def fetch_fred_indicators(errors_log):
+    """Fetches all of FRED_SERIES (the PPI/earnings/permits/PCE additions)."""
+    return {key: fetch_fred_series(series_id, errors_log, f"fred_{key}") for key, series_id in FRED_SERIES.items()}
+
+
+def fetch_gdpnow_fred(errors_log):
+    result = fetch_fred_series("GDPNOW", errors_log, "fred_gdpnow")
+    if result:
+        result["source"] = "FRED"
+    return result
 
 
 def fetch_gdpnow_bigdata(errors_log):
@@ -388,19 +431,19 @@ def main():
         print("FMP_API_KEY is not set - cannot continue.", file=sys.stderr)
         sys.exit(1)
 
-    prices = fetch_fmp_prices(errors_log)
+    prices = fetch_yfinance_symbols(errors_log)
     treasury_rates = fetch_fmp_treasury_rates(errors_log)
     indicators = fetch_fmp_indicators(errors_log)
+    fred_indicators = fetch_fred_indicators(errors_log)
     calendar_events = fetch_fmp_calendar_events(errors_log)
-    futures = fetch_yfinance_futures(errors_log)
     gdpnow = fetch_gdpnow(calendar_events, errors_log)
 
     output = {
         "generated_at": now_utc.isoformat(),
         "prices": prices,
-        "futures": futures,
         "treasury_rates": treasury_rates,
         "indicators": indicators,
+        "fred_indicators": fred_indicators,
         "calendar_events": {k: v for k, v in calendar_events.items() if k != "gdpnow"},
         "gdpnow": gdpnow,
         "calculated": {
