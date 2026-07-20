@@ -65,7 +65,7 @@ FRED_API_KEY = os.environ.get("FRED_API_KEY", "")
 
 FMP_BASE = "https://financialmodelingprep.com/stable"
 FRED_BASE = "https://api.stlouisfed.org/fred/series/observations"
-BIGDATA_RESEARCH_BASE = "https://api.bigdata.com/v1"  # research/chat endpoint - see fetch_gdpnow_bigdata()
+BIGDATA_AGENTS_BASE = "https://agents.bigdata.com/v1"  # verified against docs.bigdata.com on 2026-07-20
 
 # Active window: only fetch during these local hours in America/Chicago (CT).
 # This is the same real-world window as the user's original 14:00-22:00
@@ -238,16 +238,18 @@ def fetch_fmp_treasury_rates(errors_log):
 
 
 def fetch_fmp_indicators(errors_log):
-    today = date.today()
-    ninety_days_ago = today - timedelta(days=89)  # FMP caps this endpoint at a 90-day range
+    """
+    NOTE (fixed 2026-07-20): from/to are optional on this endpoint - live
+    testing showed FMP reports the *period start* date (e.g. "2026-01-01"
+    for Q1), not the release date. For quarterly series like GDP that put
+    the period more than 90 days before "today", a 90-day window silently
+    returned nothing. Omitting from/to entirely returns recent history for
+    every indicator (confirmed for both monthly and quarterly series) and
+    sidesteps the problem for all of them at once, not just GDP.
+    """
     results = {}
     for key, name in FMP_INDICATOR_NAMES.items():
-        data = fmp_get(
-            "economic-indicators",
-            {"name": name, "from": ninety_days_ago.isoformat(), "to": today.isoformat()},
-            errors_log,
-            f"fmp_indicator_{key}",
-        )
+        data = fmp_get("economic-indicators", {"name": name}, errors_log, f"fmp_indicator_{key}")
         if not data:
             results[key] = None
             continue
@@ -348,29 +350,76 @@ def fetch_gdpnow_fred(errors_log):
     return result
 
 
-def fetch_gdpnow_bigdata(errors_log):
+def fetch_bigdata_research_value(query, label, errors_log):
     """
-    Last-resort fallback. Asks Bigdata's Research Agent a plain-language
-    question and regex-extracts a percentage. Deliberately noisy in the logs
-    when it fires, since this path is fragile by design (see planning notes).
+    Generic last-resort fallback: asks Bigdata's Research Agent a plain-
+    language question and requests a structured numeric answer directly via
+    structured_output_schema, rather than blindly regexing free text.
+    Still fragile by design - a research-agent answer, not structured market
+    data - so it's logged loudly whenever it actually fires.
+
+    IMPORTANT: this endpoint returns a Server-Sent Events (SSE) stream, not a
+    single JSON blob - confirmed against Bigdata's own live API docs on
+    2026-07-20. An earlier draft of this function assumed a plain JSON
+    response and a completely different URL/field names - both wrong, and
+    never actually reachable from the build sandbox to test directly (same
+    limitation as FRED/yfinance during planning). This is a best-effort
+    implementation against the documented schema; the first real run in
+    GitHub Actions is the first real test of the SSE-parsing logic itself.
     """
     if not BIGDATA_API_KEY:
-        errors_log.append("bigdata_gdpnow: BIGDATA_API_KEY not set, skipping")
+        errors_log.append(f"{label}: BIGDATA_API_KEY not set, skipping")
         return None
-    errors_log.append("bigdata_gdpnow: FALLBACK LEVEL 3 IN USE - value is text-extracted and unverified")
-    headers = {"X-API-KEY": BIGDATA_API_KEY, "Content-Type": "application/json"}
-    payload = {"query": "What is the most recent Atlanta Fed GDPNow estimate, as a percentage?"}
-    data = request_with_retry(
-        "POST", f"{BIGDATA_RESEARCH_BASE}/research/query", errors_log, "bigdata_gdpnow", headers=headers, json=payload
+    errors_log.append(f"{label}: FALLBACK IN USE - value comes from a research agent, not structured market data")
+    headers = {"X-API-Key": BIGDATA_API_KEY, "Content-Type": "application/json"}
+    payload = {
+        "message": query,
+        "research_effort": "lite",
+        "structured_output_schema": {
+            "type": "object",
+            "properties": {"value": {"type": "number"}},
+            "required": ["value"],
+        },
+    }
+    try:
+        resp = requests.post(
+            f"{BIGDATA_AGENTS_BASE}/research-agent", headers=headers, json=payload, timeout=60, stream=True
+        )
+        resp.raise_for_status()
+        final_value = None
+        for line in resp.iter_lines(decode_unicode=True):
+            if not line or not line.startswith("data:"):
+                continue
+            try:
+                event = json.loads(line[len("data:"):].strip())
+            except json.JSONDecodeError:
+                continue
+            message = event.get("message", {})
+            if message.get("type") in ("StructuredOutputMessage", "AnswerMessage", "CompleteMessage"):
+                content = message.get("content")
+                try:
+                    parsed = json.loads(content)
+                    if isinstance(parsed, dict) and "value" in parsed:
+                        final_value = parsed["value"]
+                except (TypeError, json.JSONDecodeError):
+                    match = re.search(r"(-?\d+\.?\d*)", content or "")
+                    if match:
+                        final_value = float(match.group(1))
+        if final_value is None:
+            errors_log.append(f"{label}: no usable value found in the research agent's response stream")
+            return None
+        return {"value": float(final_value), "source": "Bigdata Research Agent (fallback, not structured market data)"}
+    except Exception as exc:  # noqa: BLE001
+        errors_log.append(f"{label}: request failed - {exc}")
+        return None
+
+
+def fetch_gdpnow_bigdata(errors_log):
+    return fetch_bigdata_research_value(
+        "What is the most recent Atlanta Fed GDPNow estimate, as a percentage number?",
+        "bigdata_gdpnow",
+        errors_log,
     )
-    if not data:
-        return None
-    text = json.dumps(data)
-    match = re.search(r"(-?\d+\.?\d*)\s?%", text)
-    if not match:
-        errors_log.append("bigdata_gdpnow: could not find a percentage in the response text")
-        return None
-    return {"value": float(match.group(1)), "source": "Bigdata Research Agent (text-extracted, unverified)"}
 
 
 def fetch_gdpnow(fmp_calendar_results, errors_log):
@@ -383,6 +432,37 @@ def fetch_gdpnow(fmp_calendar_results, errors_log):
         return fred_result
     errors_log.append("gdpnow: FRED also failed, falling back to Bigdata Research Agent (last resort)")
     return fetch_gdpnow_bigdata(errors_log)
+
+
+# ---------------------------------------------------------------------------
+# PMI: FMP calendar (paywalled on this plan) -> Bigdata Research Agent fallback
+# No FRED option exists here (ISM stopped free distribution to FRED years
+# ago, confirmed via a live FRED search returning 0 results). So this is a
+# two-level chain, not three like GDPNow - straight from FMP to the fragile
+# text-extraction fallback since there's nothing structured in between.
+# PMI values are typically plain numbers like "52.3", not percentages, so a
+# different regex than GDPNow's is used - still fragile, still logged loudly.
+# ---------------------------------------------------------------------------
+
+BIGDATA_PMI_QUERIES = {
+    "ism_manufacturing_pmi": "What is the most recent ISM Manufacturing PMI value, as a plain number?",
+    "ism_services_pmi": "What is the most recent ISM Services PMI value, as a plain number?",
+    "sp_global_composite_pmi": "What is the most recent S&P Global US Composite PMI value, as a plain number?",
+    "sp_global_manufacturing_pmi": "What is the most recent S&P Global US Manufacturing PMI value, as a plain number?",
+    "sp_global_services_pmi": "What is the most recent S&P Global US Services PMI value, as a plain number?",
+}
+
+
+def fetch_pmi_indicators(fmp_calendar_results, errors_log):
+    results = {}
+    for key, query in BIGDATA_PMI_QUERIES.items():
+        primary = fmp_calendar_results.get(key)
+        if primary and primary.get("value") is not None:
+            results[key] = {"value": primary["value"], "date": primary.get("date"), "source": "FMP"}
+            continue
+        errors_log.append(f"{key}: FMP calendar had no value, falling back to Bigdata Research Agent")
+        results[key] = fetch_bigdata_research_value(query, f"bigdata_{key}", errors_log)
+    return results
 
 
 # ---------------------------------------------------------------------------
@@ -437,6 +517,7 @@ def main():
     fred_indicators = fetch_fred_indicators(errors_log)
     calendar_events = fetch_fmp_calendar_events(errors_log)
     gdpnow = fetch_gdpnow(calendar_events, errors_log)
+    pmi = fetch_pmi_indicators(calendar_events, errors_log)
 
     output = {
         "generated_at": now_utc.isoformat(),
@@ -444,7 +525,7 @@ def main():
         "treasury_rates": treasury_rates,
         "indicators": indicators,
         "fred_indicators": fred_indicators,
-        "calendar_events": {k: v for k, v in calendar_events.items() if k != "gdpnow"},
+        "pmi": pmi,
         "gdpnow": gdpnow,
         "calculated": {
             "spread_2s10s_bps": compute_spread_bps(treasury_rates),
