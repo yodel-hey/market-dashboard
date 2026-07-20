@@ -237,19 +237,41 @@ def fetch_fmp_treasury_rates(errors_log):
     return data[0]
 
 
+QUARTERLY_INDICATOR_NAMES = {"realGDP", "GDP", "nominalPotentialGDP", "realGDPPerCapita"}
+
+
 def fetch_fmp_indicators(errors_log):
     """
-    NOTE (fixed 2026-07-20): from/to are optional on this endpoint - live
-    testing showed FMP reports the *period start* date (e.g. "2026-01-01"
-    for Q1), not the release date. For quarterly series like GDP that put
-    the period more than 90 days before "today", a 90-day window silently
-    returned nothing. Omitting from/to entirely returns recent history for
-    every indicator (confirmed for both monthly and quarterly series) and
-    sidesteps the problem for all of them at once, not just GDP.
+    NOTE (revised 2026-07-20, second pass): the first fix removed from/to
+    entirely to solve the GDP gap, but the very next real run showed that
+    was a regression - without explicit dates, this endpoint returned
+    noticeably OLDER data across the board on this FMP plan (e.g. CPI dated
+    2025-09 instead of 2026-06 from the prior run). Likely another case of
+    this plan behaving differently than the one used during planning.
+    Restored explicit from/to (matches what worked in the very first real
+    run) for monthly/weekly series. For quarterly series (GDP and friends),
+    a single 90-day window can legitimately miss the latest release since
+    FMP reports the *period start* date, not the release date - so those
+    specifically step back through additional 90-day windows until data is
+    found (up to ~14 months back, comfortably covering a missed quarter).
     """
+    today = date.today()
     results = {}
     for key, name in FMP_INDICATOR_NAMES.items():
-        data = fmp_get("economic-indicators", {"name": name}, errors_log, f"fmp_indicator_{key}")
+        data = None
+        window_end = today
+        max_windows = 5 if name in QUARTERLY_INDICATOR_NAMES else 1
+        for _ in range(max_windows):
+            window_start = window_end - timedelta(days=89)
+            data = fmp_get(
+                "economic-indicators",
+                {"name": name, "from": window_start.isoformat(), "to": window_end.isoformat()},
+                errors_log,
+                f"fmp_indicator_{key}",
+            )
+            if data:
+                break
+            window_end = window_start  # step back another 90 days and retry
         if not data:
             results[key] = None
             continue
@@ -371,7 +393,7 @@ def fetch_bigdata_research_value(query, label, errors_log):
         errors_log.append(f"{label}: BIGDATA_API_KEY not set, skipping")
         return None
     errors_log.append(f"{label}: FALLBACK IN USE - value comes from a research agent, not structured market data")
-    headers = {"X-API-Key": BIGDATA_API_KEY, "Content-Type": "application/json"}
+    headers = {"X-API-Key": BIGDATA_API_KEY, "Content-Type": "application/json", "Accept": "text/event-stream"}
     payload = {
         "message": query,
         "research_effort": "lite",
@@ -387,8 +409,12 @@ def fetch_bigdata_research_value(query, label, errors_log):
         )
         resp.raise_for_status()
         final_value = None
+        raw_lines_seen = []
         for line in resp.iter_lines(decode_unicode=True):
-            if not line or not line.startswith("data:"):
+            if not line:
+                continue
+            raw_lines_seen.append(line)
+            if not line.startswith("data:"):
                 continue
             try:
                 event = json.loads(line[len("data:"):].strip())
@@ -406,7 +432,10 @@ def fetch_bigdata_research_value(query, label, errors_log):
                     if match:
                         final_value = float(match.group(1))
         if final_value is None:
-            errors_log.append(f"{label}: no usable value found in the research agent's response stream")
+            # Diagnostic dump so the NEXT run tells us what the stream actually
+            # contained, instead of guessing again - truncated to stay readable.
+            preview = " | ".join(raw_lines_seen[:5])[:500] if raw_lines_seen else "(no lines received at all)"
+            errors_log.append(f"{label}: no usable value found - raw stream preview: {preview}")
             return None
         return {"value": float(final_value), "source": "Bigdata Research Agent (fallback, not structured market data)"}
     except Exception as exc:  # noqa: BLE001
