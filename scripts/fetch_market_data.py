@@ -408,7 +408,8 @@ def fetch_bigdata_research_value(query, label, errors_log):
             f"{BIGDATA_AGENTS_BASE}/research-agent", headers=headers, json=payload, timeout=120, stream=True
         )
         resp.raise_for_status()
-        final_value = None
+        structured_value = None
+        fallback_value = None
         raw_lines_seen = []
         message_types_seen = []
         for line in resp.iter_lines(decode_unicode=True):
@@ -422,23 +423,25 @@ def fetch_bigdata_research_value(query, label, errors_log):
             except json.JSONDecodeError:
                 continue
             message = event.get("message", {})
-            message_types_seen.append(message.get("type"))
-            if message.get("type") in ("StructuredOutputMessage", "AnswerMessage", "CompleteMessage"):
-                content = message.get("content")
-                try:
-                    parsed = json.loads(content)
-                    if isinstance(parsed, dict) and "value" in parsed:
-                        final_value = parsed["value"]
-                except (TypeError, json.JSONDecodeError):
-                    match = re.search(r"(-?\d+\.?\d*)", content or "")
+            message_type = message.get("type")
+            message_types_seen.append(message_type)
+            content = message.get("content")
+            # Fixed 2026-07-20 after seeing real responses: actual type strings
+            # are "STRUCTURED_OUTPUT"/"ANSWER"/"COMPLETE" (not the CamelCase
+            # names implied by the docs), and STRUCTURED_OUTPUT's content
+            # arrives as an actual dict already, not a JSON string to parse.
+            # STRUCTURED_OUTPUT is preferred when present; ANSWER/COMPLETE
+            # free text is only used if no structured value ever showed up.
+            if message_type == "STRUCTURED_OUTPUT":
+                if isinstance(content, dict) and "value" in content:
+                    structured_value = content["value"]
+            elif message_type in ("ANSWER", "COMPLETE"):
+                if isinstance(content, str):
+                    match = re.search(r"(-?\d+\.?\d*)", content)
                     if match:
-                        final_value = float(match.group(1))
+                        fallback_value = float(match.group(1))
+        final_value = structured_value if structured_value is not None else fallback_value
         if final_value is None:
-            # Diagnostic dump: the FIRST attempt logged the start of the stream,
-            # which was always just "THINKING" steps - useless, since the
-            # answer (if any) arrives at the END. This shows the tail instead,
-            # plus every message type seen, so we can tell whether the stream
-            # ended with a recognized completion type or was cut off mid-flow.
             tail_preview = " | ".join(raw_lines_seen[-3:])[:800] if raw_lines_seen else "(no lines received at all)"
             errors_log.append(
                 f"{label}: no usable value found - {len(raw_lines_seen)} lines total, "
