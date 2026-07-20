@@ -405,11 +405,12 @@ def fetch_bigdata_research_value(query, label, errors_log):
     }
     try:
         resp = requests.post(
-            f"{BIGDATA_AGENTS_BASE}/research-agent", headers=headers, json=payload, timeout=60, stream=True
+            f"{BIGDATA_AGENTS_BASE}/research-agent", headers=headers, json=payload, timeout=120, stream=True
         )
         resp.raise_for_status()
         final_value = None
         raw_lines_seen = []
+        message_types_seen = []
         for line in resp.iter_lines(decode_unicode=True):
             if not line:
                 continue
@@ -421,6 +422,7 @@ def fetch_bigdata_research_value(query, label, errors_log):
             except json.JSONDecodeError:
                 continue
             message = event.get("message", {})
+            message_types_seen.append(message.get("type"))
             if message.get("type") in ("StructuredOutputMessage", "AnswerMessage", "CompleteMessage"):
                 content = message.get("content")
                 try:
@@ -432,10 +434,16 @@ def fetch_bigdata_research_value(query, label, errors_log):
                     if match:
                         final_value = float(match.group(1))
         if final_value is None:
-            # Diagnostic dump so the NEXT run tells us what the stream actually
-            # contained, instead of guessing again - truncated to stay readable.
-            preview = " | ".join(raw_lines_seen[:5])[:500] if raw_lines_seen else "(no lines received at all)"
-            errors_log.append(f"{label}: no usable value found - raw stream preview: {preview}")
+            # Diagnostic dump: the FIRST attempt logged the start of the stream,
+            # which was always just "THINKING" steps - useless, since the
+            # answer (if any) arrives at the END. This shows the tail instead,
+            # plus every message type seen, so we can tell whether the stream
+            # ended with a recognized completion type or was cut off mid-flow.
+            tail_preview = " | ".join(raw_lines_seen[-3:])[:800] if raw_lines_seen else "(no lines received at all)"
+            errors_log.append(
+                f"{label}: no usable value found - {len(raw_lines_seen)} lines total, "
+                f"types seen: {message_types_seen} - tail: {tail_preview}"
+            )
             return None
         return {"value": float(final_value), "source": "Bigdata Research Agent (fallback, not structured market data)"}
     except Exception as exc:  # noqa: BLE001
