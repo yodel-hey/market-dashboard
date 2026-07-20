@@ -1,0 +1,115 @@
+{
+  "generated_at": "2026-07-20T17:44:43.777557+00:00",
+  "prices": {},
+  "futures": {
+    "ES=F": {
+      "price": 7506.5,
+      "changePercent": null
+    },
+    "NQ=F": {
+      "price": 28955.0,
+      "changePercent": null
+    },
+    "YM=F": {
+      "price": 52167.0,
+      "changePercent": null
+    },
+    "NKD=F": {
+      "price": 65610.0,
+      "changePercent": null
+    },
+    "6E=F": {
+      "price": 1.1440500020980835,
+      "changePercent": null
+    },
+    "ZN=F": {
+      "price": 108.84375,
+      "changePercent": null
+    },
+    "GC=F": {
+      "price": 4016.39990234375,
+      "changePercent": null
+    },
+    "CL=F": {
+      "price": 82.05000305175781,
+      "changePercent": null
+    },
+    "BTC=F": {
+      "price": 65490.0,
+      "changePercent": null
+    },
+    "^VVIX": {
+      "price": 101.8499984741211,
+      "changePercent": -2.87975988687515
+    }
+  },
+  "treasury_rates": {
+    "date": "2026-07-17",
+    "month1": 3.73,
+    "month2": 3.8,
+    "month3": 3.85,
+    "month6": 3.96,
+    "year1": 4.01,
+    "year2": 4.18,
+    "year3": 4.21,
+    "year5": 4.28,
+    "year7": 4.4,
+    "year10": 4.55,
+    "year20": 5.07,
+    "year30": 5.06
+  },
+  "indicators": {
+    "cpi_index": {
+      "value": 332.568,
+      "date": "2026-06-01"
+    },
+    "inflation_expectation": {
+      "value": 2.24,
+      "date": "2026-07-17"
+    },
+    "fed_funds_rate": {
+      "value": 3.63,
+      "date": "2026-06-01"
+    },
+    "retail_sales": {
+      "value": 666056,
+      "date": "2026-06-01"
+    },
+    "durable_goods": {
+      "value": 332218,
+      "date": "2026-05-01"
+    },
+    "unemployment_rate": {
+      "value": 4.2,
+      "date": "2026-06-01"
+    },
+    "nonfarm_payroll": {
+      "value": 158984,
+      "date": "2026-06-01"
+    },
+    "initial_claims": {
+      "value": 208000,
+      "date": "2026-07-11"
+    },
+    "housing_starts": {
+      "value": 1427,
+      "date": "2026-06-01"
+    },
+    "real_gdp": null
+  },
+  "calendar_events": {},
+  "gdpnow": {
+    "value": 1.6817,
+    "date": "2026-04-01",
+    "source": "FRED"
+  },
+  "calculated": {
+    "spread_2s10s_bps": 37,
+    "real_10y_rate": 2.31
+  },
+  "_errors": [
+    "fmp_prices: failed after 3 attempts - 402 Client Error: Payment Required for url: https://financialmodelingprep.com/stable/batch-quote?symbols=SPY%2CQQQ%2CXLK%2CXLF%2CXLE%2CGCUSD%2C%5EGSPC%2C%5ENDX%2C%5EDJI%2C%5EN225%2C%5EHSI%2C%5ESTOXX50E%2C%5EGDAXI%2C%5EVIX%2CDX-Y.NYB&apikey=1sl3QShloEyZsFLZrVplMtbH5zdMmLUx",
+    "fmp_calendar: failed after 3 attempts - 402 Client Error: Payment Required for url: https://financialmodelingprep.com/stable/economic-calendar?from=2026-05-21&to=2026-07-20&apikey=1sl3QShloEyZsFLZrVplMtbH5zdMmLUx",
+    "gdpnow: FMP calendar had no value, falling back to FRED"
+  ]
+}
