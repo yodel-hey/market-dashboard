@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-21T07:42:13.048366+00:00",
+  "generated_at": "2026-07-21T13:05:04.589458+00:00",
   "prices": {
     "SPY": {
       "price": 742.0900268554688,
@@ -38,64 +38,64 @@
       "changePercent": 3.2601026776467688
     },
     "^HSI": {
-      "price": 25162.140625,
-      "changePercent": 0.07592493017687386
+      "price": 25132.2890625,
+      "changePercent": -0.04280196084249795
     },
     "^STOXX50E": {
-      "price": 6242.759765625,
-      "changePercent": 0.24664970167515896
+      "price": 6250.93994140625,
+      "changePercent": 0.37800750604823774
     },
     "^GDAXI": {
-      "price": 24849.16015625,
-      "changePercent": 0.009943792027751435
+      "price": 24873.9296875,
+      "changePercent": 0.10963325487039466
     },
     "^VIX": {
-      "price": 17.610000610351562,
-      "changePercent": -5.576402302686314
+      "price": 17.81999969482422,
+      "changePercent": -4.450401826718447
     },
     "^VVIX": {
       "price": 102.81999969482422,
       "changePercent": -1.9548040412582397
     },
     "DX-Y.NYB": {
-      "price": 100.90699768066406,
-      "changePercent": -0.08218653813363959
+      "price": 101.01799774169922,
+      "changePercent": 0.02772539709076728
     },
     "ES=F": {
-      "price": 7515.75,
-      "changePercent": 0.42088385609780543
+      "price": 7516.75,
+      "changePercent": 0.4342452483548786
     },
     "NQ=F": {
-      "price": 29099.25,
-      "changePercent": 1.1136689397558963
+      "price": 29180.25,
+      "changePercent": 1.395126612517917
     },
     "YM=F": {
-      "price": 52201.0,
-      "changePercent": 0.2458087684596624
+      "price": 52210.0,
+      "changePercent": 0.2630921974919824
     },
     "NKD=F": {
-      "price": 66195.0,
-      "changePercent": 1.5728095749578026
+      "price": 66305.0,
+      "changePercent": 1.7415988951971766
     },
     "6E=F": {
-      "price": 1.1448999643325806,
-      "changePercent": 0.1881373432858179
+      "price": 1.1441500186920166,
+      "changePercent": 0.12251094868581346
     },
     "ZN=F": {
-      "price": 108.90625,
-      "changePercent": 0.04306014066312617
+      "price": 108.828125,
+      "changePercent": -0.028706760442084114
     },
     "GC=F": {
-      "price": 4072.39990234375,
-      "changePercent": 1.5485089085484163
+      "price": 4058.89990234375,
+      "changePercent": 1.2118757430588434
     },
     "CL=F": {
-      "price": 82.93000030517578,
-      "changePercent": -0.360450606341133
+      "price": 84.0999984741211,
+      "changePercent": 1.0452902584378232
     },
     "BTC=F": {
-      "price": 66075.0,
-      "changePercent": 1.3653447879113294
+      "price": 66595.0,
+      "changePercent": 2.1630743269157016
     }
   },
   "treasury_rates": {
@@ -191,7 +191,7 @@
       "source": "Bigdata Research Agent (fallback, not structured market data)"
     },
     "sp_global_manufacturing_pmi": {
-      "value": 53.9,
+      "value": 55.7,
       "source": "Bigdata Research Agent (fallback, not structured market data)"
     },
     "sp_global_services_pmi": {
