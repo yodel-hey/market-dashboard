@@ -78,11 +78,11 @@ BIGDATA_AGENTS_BASE = "https://agents.bigdata.com/v1"  # verified against docs.b
 # exactly 07:00-15:00 CT, correctly handled by zoneinfo's own DST rules.
 # Cron itself runs hourly in UTC year-round; this check makes the DST
 # handling automatic instead of needing the workflow file edited twice a year.
-ACTIVE_HOUR_START = 7
-ACTIVE_HOUR_END = 15  # inclusive
+ACTIVE_HOURS = {0, 2, 5, 8, 9, 12, 15}  # specific CT hours to run, not a range
 ACTIVE_TZ = ZoneInfo("America/Chicago")
 
 OUTPUT_PATH = os.environ.get("OUTPUT_PATH", "data.json")
+HISTORY_PATH = os.environ.get("HISTORY_PATH", "history.json")
 
 # All prices/indices/futures via yfinance now (2026-07-20 revision): the
 # real first Actions run showed FMP's batch-quote AND economic-calendar both
@@ -161,10 +161,10 @@ RETRY_BACKOFF_SECONDS = 5
 # ---------------------------------------------------------------------------
 
 def in_active_window(now_utc=None):
-    """True if the current America/Chicago time is inside the configured window."""
+    """True if the current America/Chicago hour is one of the configured run times."""
     now_utc = now_utc or datetime.now(ZoneInfo("UTC"))
     local = now_utc.astimezone(ACTIVE_TZ)
-    return ACTIVE_HOUR_START <= local.hour <= ACTIVE_HOUR_END
+    return local.hour in ACTIVE_HOURS
 
 
 def request_with_retry(method, url, errors_log, label, **kwargs):
@@ -577,7 +577,36 @@ def main():
     with open(OUTPUT_PATH, "w") as f:
         json.dump(output, f, indent=2, default=str)
 
+    # Append this run's snapshot to history.json for the dashboard's charts.
+    # Unbounded by design (user decision 2026-07-21): every field from
+    # `output` except _errors is kept, no pruning/rolling window.
+    history_entry = {
+        "timestamp": output["generated_at"],
+        "prices": prices,
+        "treasury_rates": treasury_rates,
+        "indicators": indicators,
+        "fred_indicators": fred_indicators,
+        "pmi": pmi,
+        "gdpnow": gdpnow,
+        "calculated": output["calculated"],
+    }
+
+    if os.path.exists(HISTORY_PATH):
+        with open(HISTORY_PATH, "r") as f:
+            try:
+                history = json.load(f)
+            except json.JSONDecodeError:
+                history = []
+    else:
+        history = []
+
+    history.append(history_entry)
+
+    with open(HISTORY_PATH, "w") as f:
+        json.dump(history, f, indent=2, default=str)
+
     print(f"Wrote {OUTPUT_PATH} with {len(errors_log)} logged issue(s).")
+    print(f"Appended snapshot to {HISTORY_PATH} ({len(history)} entries total).")
     if errors_log:
         for e in errors_log:
             print(f"  - {e}")
