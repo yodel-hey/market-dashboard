@@ -8,7 +8,13 @@ on:
     # This keeps the DST handling correct year-round without ever needing
     # to edit this file.
     - cron: '0 * * * *'
-  workflow_dispatch: {}  # adds a manual "Run workflow" button - use this for the first test run
+  workflow_dispatch:
+    inputs:
+      force_run:
+        description: 'Run now regardless of active hours (testing only)'
+        required: false
+        type: boolean
+        default: false
 
 permissions:
   contents: write  # needed so this workflow can commit data.json / history.json back into the repo
@@ -33,6 +39,11 @@ jobs:
           FMP_API_KEY: ${{ secrets.FMP_API_KEY }}
           BIGDATA_API_KEY: ${{ secrets.BIGDATA_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+          # Only set (to a truthy value) when someone ticks the "force_run"
+          # checkbox on a manual workflow_dispatch run. On the regular hourly
+          # schedule trigger this input doesn't exist, so this evaluates to
+          # an empty string and the script's normal active-hours check applies.
+          FORCE_RUN: ${{ inputs.force_run }}
         run: python scripts/fetch_market_data.py
 
       - name: Commit updated data.json
