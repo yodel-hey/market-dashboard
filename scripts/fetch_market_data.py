@@ -161,7 +161,11 @@ RETRY_BACKOFF_SECONDS = 5
 # ---------------------------------------------------------------------------
 
 def in_active_window(now_utc=None):
-    """True if the current America/Chicago hour is one of the configured run times."""
+    """True if the current America/Chicago hour is one of the configured run
+    times, OR if FORCE_RUN is set (manual test override via workflow_dispatch
+    input - never set by the regular hourly cron trigger)."""
+    if os.environ.get("FORCE_RUN", "").lower() in ("1", "true", "yes"):
+        return True
     now_utc = now_utc or datetime.now(ZoneInfo("UTC"))
     local = now_utc.astimezone(ACTIVE_TZ)
     return local.hour in ACTIVE_HOURS
@@ -541,6 +545,9 @@ def compute_real_rate(treasury_rates, inflation_expectation):
 def main():
     errors_log = []
     now_utc = datetime.now(ZoneInfo("UTC"))
+
+    if os.environ.get("FORCE_RUN", "").lower() in ("1", "true", "yes"):
+        print("FORCE_RUN is set - running regardless of the configured active hours (test override).")
 
     if not in_active_window(now_utc):
         local_time = now_utc.astimezone(ACTIVE_TZ)
