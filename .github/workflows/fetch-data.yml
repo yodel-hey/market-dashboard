@@ -4,13 +4,14 @@ on:
   schedule:
     # Runs every hour, UTC. The script itself decides whether to actually
     # do anything - it checks the current America/Chicago time and only
-    # fetches data inside the configured 14:00-22:00 window. This keeps the
-    # DST handling correct year-round without ever needing to edit this file.
+    # fetches data at the configured run hours (0, 2, 5, 8, 9, 12, 15 CT).
+    # This keeps the DST handling correct year-round without ever needing
+    # to edit this file.
     - cron: '0 * * * *'
   workflow_dispatch: {}  # adds a manual "Run workflow" button - use this for the first test run
 
 permissions:
-  contents: write  # needed so this workflow can commit data.json back into the repo
+  contents: write  # needed so this workflow can commit data.json / history.json back into the repo
 
 jobs:
   fetch:
@@ -37,14 +38,14 @@ jobs:
       - name: Commit updated data.json
         run: |
           # Defensive: on a first-ever run that happens to land outside the
-          # active window, data.json won't exist yet - don't fail in that case.
+          # active run hours, data.json won't exist yet - don't fail in that case.
           if [ ! -f data.json ]; then
-            echo "No data.json produced this run (likely outside the active window) - nothing to commit."
+            echo "No data.json produced this run (likely outside the active run hours) - nothing to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data.json
+          git add data.json history.json
           if git diff --staged --quiet; then
             echo "No changes to data.json - nothing to commit."
           else
