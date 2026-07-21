@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0B0E14;
+    --surface: #12161F;
+    --surface-2: #191E2A;
+    --border: #232938;
+    --text: #E6E8EB;
+    --text-muted: #8B93A1;
+    --up: #3DDC97;
+    --down: #FF6B6B;
+    --accent: #5B8DEF;
+    --warn: #F0A93A;
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+  }
+
+  a { color: var(--accent); }
+
+  .wrap {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px 20px 80px;
+  }
+
+  header.top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 20px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  header.top h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.6rem;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .stamp {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--up);
+    box-shadow: 0 0 8px var(--up);
+  }
+
+  .dot.stale { background: var(--warn); box-shadow: 0 0 8px var(--warn); }
+
+  section.block {
+    margin-bottom: 40px;
+  }
+
+  section.block h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 14px;
+    padding-left: 2px;
+  }
+
+  .yield-curve-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 20px;
+    display: grid;
+    grid-template-columns: 1fr 220px;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .yield-curve-panel canvas { max-height: 160px; }
+
+  .yield-stats { display: flex; flex-direction: column; gap: 10px; }
+  .stat-row { display: flex; justify-content: space-between; align-items: baseline; }
+  .stat-label { font-size: 0.78rem; color: var(--text-muted); }
+  .stat-value { font-family: var(--font-mono); font-weight: 700; font-size: 1.05rem; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 108px;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .symbol {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  .label {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+  }
+
+  .value {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  .change {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+  .change.up { color: var(--up); }
+  .change.down { color: var(--down); }
+  .change.flat { color: var(--text-muted); }
+
+  .meta-date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .spark {
+    height: 32px;
+    margin-top: auto;
+  }
+
+  .badge-fallback {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    color: var(--warn);
+    border: 1px solid rgba(240, 169, 58, 0.4);
+    background: rgba(240, 169, 58, 0.08);
+    border-radius: 5px;
+    padding: 2px 6px;
+    width: fit-content;
+  }
+
+  .badge-fallback::before {
+    content: "▲";
+    font-size: 0.6rem;
+  }
+
+  .empty-note {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    padding: 20px 0;
+  }
+
+  .errors-box {
+    background: var(--surface);
+    border: 1px solid rgba(255, 107, 107, 0.35);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    color: var(--text-muted);
+  }
+  .errors-box li { margin-bottom: 4px; }
+
+  footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    padding-top: 20px;
+  }
+
+  @media (max-width: 640px) {
+    .yield-curve-panel { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1>Market Dashboard</h1>
+    <div class="stamp"><span class="dot" id="freshness-dot"></span><span id="generated-at">lädt…</span></div>
+  </header>
+
+  <section class="block">
+    <h2>Zinskurve (Treasury)</h2>
+    <div class="yield-curve-panel">
+      <canvas id="yieldCurveChart"></canvas>
+      <div class="yield-stats" id="yield-stats"></div>
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Kurse</h2>
+    <div class="grid" id="prices-grid"></div>
+  </section>
+
+  <section class="block">
+    <h2>Zinsen &amp; Spreads</h2>
+    <div class="grid" id="rates-grid"></div>
+  </section>
+
+  <section class="block">
+    <h2>Makro</h2>
+    <div class="grid" id="macro-grid"></div>
+  </section>
+
+  <section class="block">
+    <h2>PMI</h2>
+    <div class="grid" id="pmi-grid"></div>
+  </section>
+
+  <section class="block" id="errors-section" style="display:none;">
+    <h2>Hinweise letzter Lauf</h2>
+    <div class="errors-box"><ul id="errors-list"></ul></div>
+  </section>
+
+  <footer>Aktualisiert stündlich über GitHub Actions · Quellen: yfinance, FMP, FRED, Bigdata Research Agent</footer>
+</div>
+
+<script>
+const DATA_URL = 'data.json';
+const HISTORY_URL = 'history.json';
+
+const PRICE_LABELS = {
+  'SPY': 'S&P 500 ETF', 'QQQ': 'Nasdaq 100 ETF', 'XLK': 'Technology Sector',
+  'XLF': 'Financials Sector', 'XLE': 'Energy Sector', '^GSPC': 'S&P 500 Index',
+  '^NDX': 'Nasdaq 100 Index', '^DJI': 'Dow Jones', '^N225': 'Nikkei 225',
+  '^HSI': 'Hang Seng', '^STOXX50E': 'Euro Stoxx 50', '^GDAXI': 'DAX',
+  '^VIX': 'VIX (Vola)', '^VVIX': 'VVIX', 'DX-Y.NYB': 'US Dollar Index',
+  'ES=F': 'E-mini S&P Future', 'NQ=F': 'E-mini Nasdaq Future', 'YM=F': 'E-mini Dow Future',
+  'NKD=F': 'Nikkei Future', '6E=F': 'EUR/USD Future', 'ZN=F': '10Y Note Future',
+  'GC=F': 'Gold Future', 'CL=F': 'WTI Crude Future', 'BTC=F': 'Bitcoin Future',
+};
+
+const INDICATOR_LABELS = {
+  cpi_index: 'CPI (Index)', inflation_expectation: 'Inflationserwartung (%)',
+  fed_funds_rate: 'Fed Funds Rate (%)', retail_sales: 'Retail Sales',
+  durable_goods: 'Durable Goods Orders', unemployment_rate: 'Arbeitslosenquote (%)',
+  nonfarm_payroll: 'Nonfarm Payrolls', initial_claims: 'Initial Jobless Claims',
+  housing_starts: 'Housing Starts', real_gdp: 'Real GDP',
+  ppi: 'PPI (Index)', average_hourly_earnings: 'Avg. Hourly Earnings ($)',
+  building_permits: 'Building Permits', pce_price_index: 'PCE Price Index',
+  core_pce_price_index: 'Core PCE Price Index',
+};
+
+const PMI_LABELS = {
+  ism_manufacturing_pmi: 'ISM Manufacturing PMI', ism_services_pmi: 'ISM Services PMI',
+  sp_global_composite_pmi: 'S&P Global Composite PMI',
+  sp_global_manufacturing_pmi: 'S&P Global Manufacturing PMI',
+  sp_global_services_pmi: 'S&P Global Services PMI',
+};
+
+function fmtNum(n, digits = 2) {
+  if (n === null || n === undefined) return '–';
+  return Number(n).toLocaleString('de-DE', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+}
+
+function fmtChange(pct) {
+  if (pct === null || pct === undefined) return { text: '–', cls: 'flat' };
+  const sign = pct > 0 ? '+' : '';
+  const cls = pct > 0.01 ? 'up' : pct < -0.01 ? 'down' : 'flat';
+  return { text: `${sign}${fmtNum(pct)}%`, cls };
+}
+
+function makeSparkline(canvasId, points, color) {
+  if (!points || points.length < 2) return;
+  new Chart(document.getElementById(canvasId), {
+    type: 'line',
+    data: {
+      labels: points.map((_, i) => i),
+      datasets: [{
+        data: points,
+        borderColor: color,
+        borderWidth: 1.5,
+        pointRadius: 0,
+        tension: 0.25,
+        fill: false,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      scales: { x: { display: false }, y: { display: false } },
+      plugins: { legend: { display: false }, tooltip: { enabled: false } },
+    },
+  });
+}
+
+function priceCard(symbol, entry, sparkPoints) {
+  const change = fmtChange(entry.changePercent);
+  const canvasId = `spark-${symbol.replace(/[^a-zA-Z0-9]/g, '')}`;
+  const div = document.createElement('div');
+  div.className = 'card';
+  div.innerHTML = `
+    <div class="card-top">
+      <div>
+        <div class="symbol">${symbol}</div>
+        <div class="label">${PRICE_LABELS[symbol] || ''}</div>
+      </div>
+    </div>
+    <div class="value">${fmtNum(entry.price, entry.price > 1000 ? 0 : 2)}</div>
+    <div class="change ${change.cls}">${change.text}</div>
+    <canvas class="spark" id="${canvasId}"></canvas>
+  `;
+  requestAnimationFrame(() => makeSparkline(canvasId, sparkPoints,
+    sparkPoints && sparkPoints[sparkPoints.length - 1] >= sparkPoints[0] ? '#3DDC97' : '#FF6B6B'));
+  return div;
+}
+
+function indicatorCard(key, entry, labels, sparkPoints) {
+  const canvasId = `spark-${key}`;
+  const div = document.createElement('div');
+  div.className = 'card';
+  const isFallback = entry && entry.source && entry.source.toLowerCase().includes('fallback');
+  div.innerHTML = `
+    <div class="label">${labels[key] || key}</div>
+    <div class="value">${entry ? fmtNum(entry.value, Math.abs(entry.value) < 100 ? 2 : 0) : '–'}</div>
+    <div class="meta-date">${entry && entry.date ? entry.date : ''}</div>
+    ${isFallback ? `<span class="badge-fallback">Fallback: ${entry.source}</span>` : ''}
+    <canvas class="spark" id="${canvasId}"></canvas>
+  `;
+  if (sparkPoints && sparkPoints.length >= 2) {
+    requestAnimationFrame(() => makeSparkline(canvasId, sparkPoints, '#5B8DEF'));
+  }
+  return div;
+}
+
+function extractHistorySeries(history, path) {
+  return history
+    .map(h => {
+      let v = h;
+      for (const p of path) { v = v && v[p]; }
+      return (v && typeof v === 'object' && 'value' in v) ? v.value
+           : (v && typeof v === 'object' && 'price' in v) ? v.price
+           : (typeof v === 'number' ? v : null);
+    })
+    .filter(v => v !== null && v !== undefined);
+}
+
+async function loadJSON(url) {
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) throw new Error(`${url}: ${res.status}`);
+  return res.json();
+}
+
+async function main() {
+  let data, history;
+  try {
+    data = await loadJSON(DATA_URL);
+  } catch (e) {
+    document.getElementById('generated-at').textContent = 'data.json konnte nicht geladen werden';
+    console.error(e);
+    return;
+  }
+  try {
+    history = await loadJSON(HISTORY_URL);
+  } catch (e) {
+    history = [];
+    console.warn('history.json nicht verfügbar:', e);
+  }
+
+  const genDate = new Date(data.generated_at);
+  document.getElementById('generated-at').textContent =
+    `Stand: ${genDate.toLocaleString('de-DE', { dateStyle: 'medium', timeStyle: 'short' })} UTC`;
+  const ageHours = (Date.now() - genDate.getTime()) / 3_600_000;
+  if (ageHours > 6) document.getElementById('freshness-dot').classList.add('stale');
+
+  // --- Yield curve ---
+  const tr = data.treasury_rates || {};
+  const maturities = [
+    ['month1', '1M'], ['month2', '2M'], ['month3', '3M'], ['month6', '6M'],
+    ['year1', '1Y'], ['year2', '2Y'], ['year3', '3Y'], ['year5', '5Y'],
+    ['year7', '7Y'], ['year10', '10Y'], ['year20', '20Y'], ['year30', '30Y'],
+  ];
+  const curveLabels = maturities.map(m => m[1]);
+  const curveValues = maturities.map(m => tr[m[0]] ?? null);
+  new Chart(document.getElementById('yieldCurveChart'), {
+    type: 'line',
+    data: {
+      labels: curveLabels,
+      datasets: [{
+        data: curveValues,
+        borderColor: '#5B8DEF',
+        backgroundColor: 'rgba(91,141,239,0.12)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: 3,
+        pointBackgroundColor: '#5B8DEF',
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: '#8B93A1', font: { family: 'JetBrains Mono', size: 10 } }, grid: { color: '#232938' } },
+        y: { ticks: { color: '#8B93A1', font: { family: 'JetBrains Mono', size: 10 } }, grid: { color: '#232938' } },
+      },
+    },
+  });
+
+  const calc = data.calculated || {};
+  const spread = calc.spread_2s10s_bps;
+  document.getElementById('yield-stats').innerHTML = `
+    <div class="stat-row"><span class="stat-label">2Y</span><span class="stat-value">${fmtNum(tr.year2)}%</span></div>
+    <div class="stat-row"><span class="stat-label">10Y</span><span class="stat-value">${fmtNum(tr.year10)}%</span></div>
+    <div class="stat-row"><span class="stat-label">2s10s Spread</span><span class="stat-value" style="color:${spread < 0 ? 'var(--down)' : 'var(--up)'}">${spread ?? '–'} bps</span></div>
+    <div class="stat-row"><span class="stat-label">Realzins (10Y)</span><span class="stat-value">${fmtNum(calc.real_10y_rate)}%</span></div>
+  `;
+
+  // --- Prices ---
+  const pricesGrid = document.getElementById('prices-grid');
+  Object.entries(data.prices || {}).forEach(([symbol, entry]) => {
+    const spark = extractHistorySeries(history, ['prices', symbol]);
+    pricesGrid.appendChild(priceCard(symbol, entry, spark));
+  });
+
+  // --- Rates & spreads (as cards, beyond the curve panel) ---
+  const ratesGrid = document.getElementById('rates-grid');
+  const spreadSpark = extractHistorySeries(history, ['calculated', 'spread_2s10s_bps']);
+  const realRateSpark = extractHistorySeries(history, ['calculated', 'real_10y_rate']);
+  ratesGrid.appendChild(indicatorCard('spread_2s10s_bps', { value: spread }, { spread_2s10s_bps: '2s10s Spread (bps)' }, spreadSpark));
+  ratesGrid.appendChild(indicatorCard('real_10y_rate', { value: calc.real_10y_rate }, { real_10y_rate: 'Realzins 10Y (%)' }, realRateSpark));
+  ['year1', 'year2', 'year5', 'year10', 'year30'].forEach(k => {
+    ratesGrid.appendChild(indicatorCard(k, { value: tr[k] }, {
+      year1: 'Treasury 1Y (%)', year2: 'Treasury 2Y (%)', year5: 'Treasury 5Y (%)',
+      year10: 'Treasury 10Y (%)', year30: 'Treasury 30Y (%)',
+    }, extractHistorySeries(history, ['treasury_rates', k])));
+  });
+
+  // --- Macro (indicators + fred_indicators) ---
+  const macroGrid = document.getElementById('macro-grid');
+  const macroSource = { ...(data.indicators || {}), ...(data.fred_indicators || {}) };
+  Object.entries(macroSource).forEach(([key, entry]) => {
+    const path = data.indicators && key in data.indicators ? ['indicators', key] : ['fred_indicators', key];
+    const spark = extractHistorySeries(history, path);
+    macroGrid.appendChild(indicatorCard(key, entry, INDICATOR_LABELS, spark));
+  });
+  // GDPNow separately (has its own top-level key)
+  if (data.gdpnow) {
+    macroGrid.appendChild(indicatorCard('gdpnow', data.gdpnow, { gdpnow: 'GDPNow (%)' },
+      extractHistorySeries(history, ['gdpnow'])));
+  }
+
+  // --- PMI ---
+  const pmiGrid = document.getElementById('pmi-grid');
+  Object.entries(data.pmi || {}).forEach(([key, entry]) => {
+    pmiGrid.appendChild(indicatorCard(key, entry, PMI_LABELS, extractHistorySeries(history, ['pmi', key])));
+  });
+
+  // --- Errors ---
+  if (data._errors && data._errors.length) {
+    document.getElementById('errors-section').style.display = '';
+    const list = document.getElementById('errors-list');
+    data._errors.forEach(e => {
+      const li = document.createElement('li');
+      li.textContent = e;
+      list.appendChild(li);
+    });
+  }
+
+  // Empty-state notes if a section has nothing
+  [['prices-grid', data.prices], ['rates-grid', tr], ['macro-grid', macroSource], ['pmi-grid', data.pmi]]
+    .forEach(([id, obj]) => {
+      const el = document.getElementById(id);
+      if (!obj || Object.keys(obj).length === 0) {
+        el.innerHTML = '<div class="empty-note">Keine Daten für diesen Lauf.</div>';
+      }
+    });
+}
+
+main();
+</script>
+</body>
+</html>
