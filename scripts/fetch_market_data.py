@@ -78,7 +78,8 @@ BIGDATA_AGENTS_BASE = "https://agents.bigdata.com/v1"  # verified against docs.b
 # exactly 07:00-15:00 CT, correctly handled by zoneinfo's own DST rules.
 # Cron itself runs hourly in UTC year-round; this check makes the DST
 # handling automatic instead of needing the workflow file edited twice a year.
-ACTIVE_HOURS = {0, 2, 5, 8, 9, 12, 15}  # specific CT hours to run, not a range
+ACTIVE_TIMES = [(0, 8), (2, 9), (5, 8), (8, 9), (9, 10), (12, 9), (15, 11)]  # (CT hour, CT minute) run targets
+ACTIVE_TOLERANCE_MINUTES = 20  # allow a run up to this many minutes AFTER a target time (covers GitHub schedule jitter)
 ACTIVE_TZ = ZoneInfo("America/Chicago")
 
 OUTPUT_PATH = os.environ.get("OUTPUT_PATH", "data.json")
@@ -161,14 +162,20 @@ RETRY_BACKOFF_SECONDS = 5
 # ---------------------------------------------------------------------------
 
 def in_active_window(now_utc=None):
-    """True if the current America/Chicago hour is one of the configured run
-    times, OR if FORCE_RUN is set (manual test override via workflow_dispatch
-    input - never set by the regular hourly cron trigger)."""
+    """True if the current America/Chicago time is at, or up to
+    ACTIVE_TOLERANCE_MINUTES after, one of the configured (hour, minute)
+    run targets. FORCE_RUN (manual test override via workflow_dispatch
+    input) always returns True regardless of the current time."""
     if os.environ.get("FORCE_RUN", "").lower() in ("1", "true", "yes"):
         return True
     now_utc = now_utc or datetime.now(ZoneInfo("UTC"))
     local = now_utc.astimezone(ACTIVE_TZ)
-    return local.hour in ACTIVE_HOURS
+    current_minutes = local.hour * 60 + local.minute
+    for target_hour, target_minute in ACTIVE_TIMES:
+        target_minutes = target_hour * 60 + target_minute
+        if 0 <= current_minutes - target_minutes <= ACTIVE_TOLERANCE_MINUTES:
+            return True
+    return False
 
 
 def request_with_retry(method, url, errors_log, label, **kwargs):
