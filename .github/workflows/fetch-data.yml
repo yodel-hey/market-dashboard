@@ -2,12 +2,19 @@ name: Fetch Market Data
 
 on:
   schedule:
-    # Runs every hour, UTC. The script itself decides whether to actually
-    # do anything - it checks the current America/Chicago time and only
-    # fetches data at the configured run hours (0, 2, 5, 8, 9, 12, 15 CT).
-    # This keeps the DST handling correct year-round without ever needing
-    # to edit this file.
-    - cron: '0 * * * *'
+    # 7 specific trigger times per day, offset a few minutes past the hour
+    # (not :00) to avoid GitHub's documented top-of-the-hour congestion for
+    # scheduled workflows. Each corresponds to a CT target time - see the
+    # Python script's ACTIVE_TIMES for the source of truth. These are UTC
+    # clock times tied to the current CDT (UTC-5) offset; they will drift by
+    # 1 hour once Daylight Saving ends in autumn and need updating then.
+    - cron: '8 5 * * *'    # 00:08 CT
+    - cron: '9 7 * * *'    # 02:09 CT
+    - cron: '8 10 * * *'   # 05:08 CT
+    - cron: '9 13 * * *'   # 08:09 CT
+    - cron: '10 14 * * *'  # 09:10 CT
+    - cron: '9 17 * * *'   # 12:09 CT
+    - cron: '11 20 * * *'  # 15:11 CT
   workflow_dispatch:
     inputs:
       force_run:
@@ -40,18 +47,18 @@ jobs:
           BIGDATA_API_KEY: ${{ secrets.BIGDATA_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
           # Only set (to a truthy value) when someone ticks the "force_run"
-          # checkbox on a manual workflow_dispatch run. On the regular hourly
-          # schedule trigger this input doesn't exist, so this evaluates to
-          # an empty string and the script's normal active-hours check applies.
+          # checkbox on a manual workflow_dispatch run. On the regular
+          # schedule triggers this input doesn't exist, so this evaluates to
+          # an empty string and the script's normal active-times check applies.
           FORCE_RUN: ${{ inputs.force_run }}
         run: python scripts/fetch_market_data.py
 
       - name: Commit updated data.json
         run: |
-          # Defensive: on a first-ever run that happens to land outside the
-          # active run hours, data.json won't exist yet - don't fail in that case.
+          # Defensive: if a run lands outside all active-time tolerance
+          # windows, data.json won't exist yet - don't fail in that case.
           if [ ! -f data.json ]; then
-            echo "No data.json produced this run (likely outside the active run hours) - nothing to commit."
+            echo "No data.json produced this run (outside all active-time windows) - nothing to commit."
             exit 0
           fi
           git config user.name "github-actions[bot]"
