@@ -1,117 +1,117 @@
 {
-  "generated_at": "2026-07-27T17:13:29.357749+00:00",
+  "generated_at": "2026-07-28T13:17:05.501801+00:00",
   "prices": {
     "SPY": {
-      "price": 736.6900024414062,
-      "changePercent": -0.30313970965823767
+      "price": 739.0900268554688,
+      "changePercent": 0.02165755636849861
     },
     "QQQ": {
-      "price": 678.280029296875,
-      "changePercent": -0.8695835233350675
+      "price": 682.1199951171875,
+      "changePercent": -0.3083737064717624
     },
     "XLK": {
-      "price": 172.92999267578125,
-      "changePercent": -1.6772868575918112
+      "price": 174.3000030517578,
+      "changePercent": -0.898340793262674
     },
     "XLF": {
-      "price": 56.623600006103516,
-      "changePercent": 0.5569146246926683
+      "price": 56.880001068115234,
+      "changePercent": 1.0122530295205803
     },
     "XLE": {
-      "price": 58.724998474121094,
-      "changePercent": -1.5011748973464436
+      "price": 58.36000061035156,
+      "changePercent": -2.1133819927986552
     },
     "^GSPC": {
-      "price": 7390.22021484375,
-      "changePercent": -0.2935756124859887
+      "price": 7413.18017578125,
+      "changePercent": 0.0161926410441289
     },
     "^NDX": {
-      "price": 27880.34765625,
-      "changePercent": -0.8816453046200764
+      "price": 28039.2109375,
+      "changePercent": -0.3168651500412104
     },
     "^DJI": {
-      "price": 52040.28125,
-      "changePercent": 0.17908792091977918
+      "price": 52210.078125,
+      "changePercent": 0.5059519512582475
     },
     "^N225": {
-      "price": 64611.1484375,
-      "changePercent": null
+      "price": 62364.921875,
+      "changePercent": -3.952290841536879
     },
     "^HSI": {
-      "price": 24963.23046875,
-      "changePercent": null
+      "price": 25310.849609375,
+      "changePercent": 0.41127140425951314
     },
     "^STOXX50E": {
-      "price": 6282.2099609375,
-      "changePercent": 0.02022021453950813
+      "price": 6258.85986328125,
+      "changePercent": -0.3716860436285935
     },
     "^GDAXI": {
-      "price": 25361.029296875,
-      "changePercent": 1.0439830147615443
+      "price": 25319.859375,
+      "changePercent": -0.16233537445608717
     },
     "^VIX": {
-      "price": 19.5,
-      "changePercent": 4.951561249040295
+      "price": 18.709999084472656,
+      "changePercent": 0.21424214255627827
     },
     "^VVIX": {
-      "price": 102.94000244140625,
-      "changePercent": 2.193982935393732
+      "price": 100.91000366210938,
+      "changePercent": 0.17869581969332002
     },
     "DX-Y.NYB": {
-      "price": 101.45600128173828,
+      "price": 101.51300048828125,
       "changePercent": null
     },
     "ES=F": {
-      "price": 7419.75,
-      "changePercent": null
+      "price": 7457.0,
+      "changePercent": 0.11747725975900379
     },
     "NQ=F": {
       "price": 28007.25,
-      "changePercent": null
+      "changePercent": -0.6482795317488471
     },
     "YM=F": {
-      "price": 52199.0,
-      "changePercent": null
+      "price": 52866.0,
+      "changePercent": 0.9239815203695927
     },
     "NKD=F": {
-      "price": 63480.0,
-      "changePercent": null
+      "price": 62565.0,
+      "changePercent": -2.3946957878315134
     },
     "6E=F": {
-      "price": 1.1401499509811401,
-      "changePercent": null
+      "price": 1.1392500400543213,
+      "changePercent": 0.1318400748354566
     },
     "ZN=F": {
-      "price": 108.53125,
-      "changePercent": null
+      "price": 108.65625,
+      "changePercent": 0.0719527989638797
     },
     "GC=F": {
-      "price": 4078.0,
-      "changePercent": null
+      "price": 4033.300048828125,
+      "changePercent": -1.0111658159743526
     },
     "CL=F": {
-      "price": 82.79000091552734,
-      "changePercent": null
+      "price": 81.13999938964844,
+      "changePercent": -1.779447052223995
     },
     "BTC=F": {
-      "price": 64815.0,
-      "changePercent": null
+      "price": 63510.0,
+      "changePercent": -2.2396675132763795
     }
   },
   "treasury_rates": {
-    "date": "2026-07-24",
+    "date": "2026-07-27",
     "month1": 3.8,
     "month2": 3.95,
     "month3": 3.96,
-    "month6": 4.08,
+    "month6": 4.1,
     "year1": 4.14,
-    "year2": 4.33,
-    "year3": 4.36,
-    "year5": 4.43,
-    "year7": 4.55,
-    "year10": 4.69,
-    "year20": 5.18,
-    "year30": 5.16
+    "year2": 4.31,
+    "year3": 4.35,
+    "year5": 4.4,
+    "year7": 4.52,
+    "year10": 4.65,
+    "year20": 5.15,
+    "year30": 5.12
   },
   "indicators": {
     "cpi_index": {
@@ -119,8 +119,8 @@
       "date": "2026-06-01"
     },
     "inflation_expectation": {
-      "value": 2.26,
-      "date": "2026-07-24"
+      "value": 2.21,
+      "date": "2026-07-27"
     },
     "fed_funds_rate": {
       "value": 3.63,
@@ -205,11 +205,11 @@
     "source": "FRED"
   },
   "calculated": {
-    "spread_2s10s_bps": 36,
-    "real_10y_rate": 2.43
+    "spread_2s10s_bps": 34,
+    "real_10y_rate": 2.44
   },
   "_errors": [
-    "fmp_calendar: failed after 3 attempts - 402 Client Error: Payment Required for url: https://financialmodelingprep.com/stable/economic-calendar?from=2026-05-28&to=2026-07-27&apikey=1sl3QShloEyZsFLZrVplMtbH5zdMmLUx",
+    "fmp_calendar: failed after 3 attempts - 402 Client Error: Payment Required for url: https://financialmodelingprep.com/stable/economic-calendar?from=2026-05-29&to=2026-07-28&apikey=1sl3QShloEyZsFLZrVplMtbH5zdMmLUx",
     "gdpnow: FMP calendar had no value, falling back to FRED",
     "ism_manufacturing_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_ism_manufacturing_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
