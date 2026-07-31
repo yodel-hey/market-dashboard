@@ -1897,5 +1897,216 @@
       "spread_2s10s_bps": 45,
       "real_10y_rate": 2.41
     }
+  },
+  {
+    "timestamp": "2026-07-31T13:18:01.814198+00:00",
+    "prices": {
+      "SPY": {
+        "price": 741.6900024414062,
+        "changePercent": 1.6765799496011913
+      },
+      "QQQ": {
+        "price": 683.5499877929688,
+        "changePercent": 3.2974185798204427
+      },
+      "XLK": {
+        "price": 175.72999572753906,
+        "changePercent": 5.499182326078027
+      },
+      "XLF": {
+        "price": 57.0,
+        "changePercent": 0.5645725001786878
+      },
+      "XLE": {
+        "price": 58.959999084472656,
+        "changePercent": 0.5285550733651144
+      },
+      "^GSPC": {
+        "price": 7437.6298828125,
+        "changePercent": 1.6604359135647773
+      },
+      "^NDX": {
+        "price": 28106.349609375,
+        "changePercent": 3.3613879957878146
+      },
+      "^DJI": {
+        "price": 52208.05859375,
+        "changePercent": 1.1898986228147879
+      },
+      "^N225": {
+        "price": 64362.01953125,
+        "changePercent": 4.0321536814289525
+      },
+      "^HSI": {
+        "price": 25884.4296875,
+        "changePercent": 0.09880098161996599
+      },
+      "^STOXX50E": {
+        "price": 6372.72998046875,
+        "changePercent": 0.4465367656684803
+      },
+      "^GDAXI": {
+        "price": 25648.400390625,
+        "changePercent": 0.14200785626321982
+      },
+      "^VIX": {
+        "price": 17.219999313354492,
+        "changePercent": 0.7606738420474277
+      },
+      "^VVIX": {
+        "price": 94.66000366210938,
+        "changePercent": -13.528818300399234
+      },
+      "DX-Y.NYB": {
+        "price": 100.34400177001953,
+        "changePercent": 0.33396623003177095
+      },
+      "ES=F": {
+        "price": 7486.0,
+        "changePercent": 0.18066242890598863
+      },
+      "NQ=F": {
+        "price": 28503.0,
+        "changePercent": 0.9393453798549815
+      },
+      "YM=F": {
+        "price": 52556.0,
+        "changePercent": 0.3360061092019855
+      },
+      "NKD=F": {
+        "price": 63945.0,
+        "changePercent": 0.2822865208186309
+      },
+      "6E=F": {
+        "price": 1.1508500576019287,
+        "changePercent": -0.2902356929481743
+      },
+      "ZN=F": {
+        "price": 108.25,
+        "changePercent": -0.2734993522383763
+      },
+      "GC=F": {
+        "price": 4093.60009765625,
+        "changePercent": -0.15853271493824286
+      },
+      "CL=F": {
+        "price": 85.61000061035156,
+        "changePercent": 2.416562221507464
+      },
+      "BTC=F": {
+        "price": 63905.0,
+        "changePercent": -1.3431107680432266
+      }
+    },
+    "treasury_rates": {
+      "date": "2026-07-30",
+      "month1": 3.79,
+      "month2": 3.84,
+      "month3": 3.82,
+      "month6": 3.98,
+      "year1": 4.04,
+      "year2": 4.23,
+      "year3": 4.3,
+      "year5": 4.38,
+      "year7": 4.52,
+      "year10": 4.68,
+      "year20": 5.22,
+      "year30": 5.21
+    },
+    "indicators": {
+      "cpi_index": {
+        "value": 332.568,
+        "date": "2026-06-01"
+      },
+      "inflation_expectation": {
+        "value": 2.27,
+        "date": "2026-07-30"
+      },
+      "fed_funds_rate": {
+        "value": 3.63,
+        "date": "2026-06-01"
+      },
+      "retail_sales": {
+        "value": 666056,
+        "date": "2026-06-01"
+      },
+      "durable_goods": {
+        "value": 334772,
+        "date": "2026-06-01"
+      },
+      "unemployment_rate": {
+        "value": 4.2,
+        "date": "2026-06-01"
+      },
+      "nonfarm_payroll": {
+        "value": 158984,
+        "date": "2026-06-01"
+      },
+      "initial_claims": {
+        "value": 197000,
+        "date": "2026-07-25"
+      },
+      "housing_starts": {
+        "value": 1427,
+        "date": "2026-06-01"
+      },
+      "real_gdp": {
+        "value": 24270.599,
+        "date": "2026-04-01"
+      }
+    },
+    "fred_indicators": {
+      "ppi": {
+        "value": 156.566,
+        "date": "2026-06-01"
+      },
+      "average_hourly_earnings": {
+        "value": 37.64,
+        "date": "2026-06-01"
+      },
+      "building_permits": {
+        "value": 1374.0,
+        "date": "2026-06-01"
+      },
+      "pce_price_index": {
+        "value": 131.392,
+        "date": "2026-06-01"
+      },
+      "core_pce_price_index": {
+        "value": 130.266,
+        "date": "2026-06-01"
+      }
+    },
+    "pmi": {
+      "ism_manufacturing_pmi": {
+        "value": 53.3,
+        "source": "Bigdata Research Agent (fallback, not structured market data)"
+      },
+      "ism_services_pmi": {
+        "value": 54.0,
+        "source": "Bigdata Research Agent (fallback, not structured market data)"
+      },
+      "sp_global_composite_pmi": {
+        "value": 53.6,
+        "source": "Bigdata Research Agent (fallback, not structured market data)"
+      },
+      "sp_global_manufacturing_pmi": {
+        "value": 53.8,
+        "source": "Bigdata Research Agent (fallback, not structured market data)"
+      },
+      "sp_global_services_pmi": {
+        "value": 53.6,
+        "source": "Bigdata Research Agent (fallback, not structured market data)"
+      }
+    },
+    "gdpnow": {
+      "value": 4.9543,
+      "date": "2026-07-01",
+      "source": "FRED"
+    },
+    "calculated": {
+      "spread_2s10s_bps": 45,
+      "real_10y_rate": 2.41
+    }
   }
 ]
