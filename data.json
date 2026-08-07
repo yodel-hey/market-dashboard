@@ -1,101 +1,101 @@
 {
-  "generated_at": "2026-08-07T10:28:32.231464+00:00",
+  "generated_at": "2026-08-07T17:12:35.846394+00:00",
   "prices": {
     "SPY": {
-      "price": 768.5599975585938,
-      "changePercent": -0.15978130449319902
+      "price": 772.1500244140625,
+      "changePercent": 0.4671108133226843
     },
     "QQQ": {
-      "price": 714.6500244140625,
-      "changePercent": -0.3694358600311447
+      "price": 721.0800170898438,
+      "changePercent": 0.8997400764175674
     },
     "XLK": {
-      "price": 185.3300018310547,
-      "changePercent": -0.31197989329764003
+      "price": 187.4199981689453,
+      "changePercent": 1.1277161372910622
     },
     "XLF": {
-      "price": 57.810001373291016,
-      "changePercent": -0.3275838391534214
+      "price": 57.58359909057617,
+      "changePercent": -0.39163168541186816
     },
     "XLE": {
-      "price": 58.15999984741211,
-      "changePercent": 1.4831590538352883
+      "price": 57.915000915527344,
+      "changePercent": -0.4212498839882083
     },
     "^GSPC": {
-      "price": 7709.9599609375,
-      "changePercent": -0.17595333873230398
+      "price": 7745.490234375,
+      "changePercent": 0.46083603050488037
     },
     "^NDX": {
-      "price": 29373.330078125,
-      "changePercent": -0.3881572271573217
+      "price": 29641.728515625,
+      "changePercent": 0.9137487536691746
     },
     "^DJI": {
-      "price": 53885.1015625,
-      "changePercent": -0.853775593628433
+      "price": 53974.41015625,
+      "changePercent": 0.16573893555051236
     },
     "^N225": {
-      "price": 65606.7109375,
-      "changePercent": -0.1165394006772797
+      "price": 65683.2578125,
+      "changePercent": null
     },
     "^HSI": {
-      "price": 25668.029296875,
-      "changePercent": 0.5395553977228174
+      "price": 25530.279296875,
+      "changePercent": null
     },
     "^STOXX50E": {
-      "price": 6540.080078125,
-      "changePercent": 0.5770038137773712
+      "price": 6523.85986328125,
+      "changePercent": 0.3275602915708604
     },
     "^GDAXI": {
-      "price": 26337.66015625,
-      "changePercent": 0.7556553482369325
+      "price": 26319.44921875,
+      "changePercent": 0.6859887593511743
     },
     "^VIX": {
-      "price": 15.279999732971191,
-      "changePercent": 0.8580865855726636
+      "price": 14.979999542236328,
+      "changePercent": -1.1221127430657805
     },
     "^VVIX": {
-      "price": 88.72000122070312,
-      "changePercent": -1.890964368795633
+      "price": 90.55000305175781,
+      "changePercent": 2.0626711067128007
     },
     "DX-Y.NYB": {
-      "price": 99.9280014038086,
-      "changePercent": -0.042012420107716636
+      "price": 99.5530014038086,
+      "changePercent": -0.41712494928746024
     },
     "ES=F": {
-      "price": 7744.5,
-      "changePercent": 0.12605449432754776
+      "price": 7768.5,
+      "changePercent": 0.43634248036458834
     },
     "NQ=F": {
-      "price": 29602.25,
-      "changePercent": 0.3865946605851483
+      "price": 29748.5,
+      "changePercent": 0.8825549159410951
     },
     "YM=F": {
-      "price": 54020.0,
-      "changePercent": 0.012959843000759075
+      "price": 54075.0,
+      "changePercent": 0.11478718086386609
     },
     "NKD=F": {
-      "price": 65750.0,
-      "changePercent": 0.13706975327444412
+      "price": 66025.0,
+      "changePercent": 0.5558939993908011
     },
     "6E=F": {
-      "price": 1.1543500423431396,
-      "changePercent": 0.1344620437630883
+      "price": 1.1576499938964844,
+      "changePercent": 0.42071739217882387
     },
     "ZN=F": {
-      "price": 108.59375,
-      "changePercent": 0.08640552995391705
+      "price": 108.65625,
+      "changePercent": 0.14400921658986177
     },
     "GC=F": {
-      "price": 4368.2001953125,
-      "changePercent": 2.9750163911480434
+      "price": 4391.7998046875,
+      "changePercent": 3.5313485310584634
     },
     "CL=F": {
-      "price": 77.19000244140625,
-      "changePercent": -0.12938086807682303
+      "price": 78.0999984741211,
+      "changePercent": 1.04799786388801
     },
     "BTC=F": {
-      "price": 65065.0,
-      "changePercent": 0.6886412875270814
+      "price": 64900.0,
+      "changePercent": 0.4333023831631074
     }
   },
   "treasury_rates": {
@@ -135,12 +135,12 @@
       "date": "2026-06-01"
     },
     "unemployment_rate": {
-      "value": 4.2,
-      "date": "2026-06-01"
+      "value": 4.1,
+      "date": "2026-07-01"
     },
     "nonfarm_payroll": {
-      "value": 158984,
-      "date": "2026-06-01"
+      "value": 158858,
+      "date": "2026-07-01"
     },
     "initial_claims": {
       "value": 199000,
@@ -161,8 +161,8 @@
       "date": "2026-06-01"
     },
     "average_hourly_earnings": {
-      "value": 37.64,
-      "date": "2026-06-01"
+      "value": 37.62,
+      "date": "2026-07-01"
     },
     "building_permits": {
       "value": 1374.0,
