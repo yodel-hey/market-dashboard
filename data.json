@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-07T10:09:24.040149+00:00",
+  "generated_at": "2026-09-07T13:28:04.837530+00:00",
   "prices": {
     "SPY": {
       "price": 770.1900024414062,
@@ -42,24 +42,24 @@
       "changePercent": -0.9268691781810208
     },
     "^STOXX50E": {
-      "price": 6388.580078125,
-      "changePercent": -0.06804544296025249
+      "price": 6397.93994140625,
+      "changePercent": 0.07836415363926261
     },
     "^GDAXI": {
-      "price": 25977.689453125,
-      "changePercent": -0.26380204738283697
+      "price": 25977.41015625,
+      "changePercent": -0.26487435246458074
     },
     "^VIX": {
-      "price": 15.050000190734863,
-      "changePercent": 3.5788056938755273
+      "price": 15.140000343322754,
+      "changePercent": 4.1982148765451175
     },
     "^VVIX": {
       "price": 84.41999816894531,
       "changePercent": 0.7398509482208125
     },
     "DX-Y.NYB": {
-      "price": 98.95700073242188,
-      "changePercent": -0.2047225919628225
+      "price": 98.93000030517578,
+      "changePercent": -0.23195174308114885
     },
     "ES=F": {
       "price": 7722.0,
@@ -94,8 +94,8 @@
       "changePercent": 0.0
     },
     "BTC=F": {
-      "price": 79510.0,
-      "changePercent": -0.6807819624008494
+      "price": 79765.0,
+      "changePercent": -0.36225095247017675
     }
   },
   "treasury_rates": {
