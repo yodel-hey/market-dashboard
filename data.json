@@ -1,100 +1,100 @@
 {
-  "generated_at": "2026-09-08T14:24:14.553860+00:00",
+  "generated_at": "2026-09-08T17:13:56.364690+00:00",
   "prices": {
     "SPY": {
-      "price": 766.989990234375,
-      "changePercent": -0.4154834776986991
+      "price": 767.6500244140625,
+      "changePercent": -0.329785899491338
     },
     "QQQ": {
-      "price": 717.7899780273438,
-      "changePercent": -0.16274116912678624
+      "price": 720.635009765625,
+      "changePercent": 0.23297370393043268
     },
     "XLK": {
-      "price": 187.82000732421875,
-      "changePercent": 0.28834288148317255
+      "price": 188.5050048828125,
+      "changePercent": 0.6541040749147233
     },
     "XLF": {
-      "price": 57.540000915527344,
-      "changePercent": -0.9638512449241873
+      "price": 57.5,
+      "changePercent": -1.0326996383456795
     },
     "XLE": {
-      "price": 65.20500183105469,
-      "changePercent": 1.7873935624390813
+      "price": 64.3499984741211,
+      "changePercent": 0.4527020396185445
     },
     "^GSPC": {
-      "price": 7685.240234375,
-      "changePercent": -0.4322009543075008
+      "price": 7692.02001953125,
+      "changePercent": -0.344363975186006
     },
     "^NDX": {
-      "price": 29491.939453125,
-      "changePercent": -0.17672174291587572
+      "price": 29607.775390625,
+      "changePercent": 0.2153556597795738
     },
     "^DJI": {
-      "price": 52767.46875,
-      "changePercent": -1.2108777152164452
+      "price": 52854.98828125,
+      "changePercent": -1.047027186097343
     },
     "^N225": {
-      "price": 65269.328125,
-      "changePercent": -1.7025877790563324
+      "price": 66399.84375,
+      "changePercent": null
     },
     "^HSI": {
-      "price": 25317.1796875,
-      "changePercent": -0.3775193930115912
+      "price": 25413.119140625,
+      "changePercent": null
     },
     "^STOXX50E": {
-      "price": 6396.4599609375,
-      "changePercent": -0.11758720987860656
+      "price": 6413.169921875,
+      "changePercent": 0.14334324638294668
     },
     "^GDAXI": {
-      "price": 25947.75,
-      "changePercent": -0.22601745970794745
+      "price": 26007.630859375,
+      "changePercent": 0.004235715144551665
     },
     "^VIX": {
-      "price": 15.680000305175781,
-      "changePercent": 2.4836608477366724
+      "price": 15.3100004196167,
+      "changePercent": 0.06536097226908351
     },
     "^VVIX": {
-      "price": 89.70999908447266,
-      "changePercent": 6.266288829976924
+      "price": 88.20999908447266,
+      "changePercent": 4.489458656398705
     },
     "DX-Y.NYB": {
-      "price": 98.88600158691406,
+      "price": 98.88099670410156,
       "changePercent": null
     },
     "ES=F": {
-      "price": 7687.75,
+      "price": 7698.5,
       "changePercent": null
     },
     "NQ=F": {
-      "price": 29478.25,
+      "price": 29622.0,
       "changePercent": null
     },
     "YM=F": {
-      "price": 52824.0,
+      "price": 52916.0,
       "changePercent": null
     },
     "NKD=F": {
-      "price": 65250.0,
+      "price": 65395.0,
       "changePercent": null
     },
     "6E=F": {
-      "price": 1.1622999906539917,
+      "price": 1.162750005722046,
       "changePercent": null
     },
     "ZN=F": {
-      "price": 107.375,
+      "price": 107.421875,
       "changePercent": null
     },
     "GC=F": {
-      "price": 4440.2001953125,
+      "price": 4444.5,
       "changePercent": null
     },
     "CL=F": {
-      "price": 93.43000030517578,
+      "price": 92.04000091552734,
       "changePercent": null
     },
     "BTC=F": {
-      "price": 78310.0,
+      "price": 79035.0,
       "changePercent": null
     }
   },
