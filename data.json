@@ -1,101 +1,101 @@
 {
-  "generated_at": "2026-10-07T14:26:52.818876+00:00",
+  "generated_at": "2026-10-07T17:23:21.508306+00:00",
   "prices": {
     "SPY": {
-      "price": 774.5999755859375,
-      "changePercent": -0.5763199520925472
+      "price": 777.5599975585938,
+      "changePercent": -0.19638671323395596
     },
     "QQQ": {
-      "price": 754.5599975585938,
-      "changePercent": -0.6713497836178859
+      "price": 757.4000244140625,
+      "changePercent": -0.2974947753419117
     },
     "XLK": {
-      "price": 200.6699981689453,
-      "changePercent": -0.658416748046875
+      "price": 201.4199981689453,
+      "changePercent": -0.2871296193340037
     },
     "XLF": {
-      "price": 53.51499938964844,
-      "changePercent": -0.9164949958671169
+      "price": 53.78499984741211,
+      "changePercent": -0.4165867082269271
     },
     "XLE": {
-      "price": 63.57500076293945,
-      "changePercent": -0.27450860715379904
+      "price": 63.16999816894531,
+      "changePercent": -0.9098067938112745
     },
     "^GSPC": {
-      "price": 7773.5498046875,
-      "changePercent": -0.580391051889854
+      "price": 7803.240234375,
+      "changePercent": -0.20066608926690277
     },
     "^NDX": {
-      "price": 31020.34765625,
-      "changePercent": -0.6537278047584999
+      "price": 31139.123046875,
+      "changePercent": -0.2733357982636941
     },
     "^DJI": {
-      "price": 50980.66015625,
-      "changePercent": -1.0493160896498475
+      "price": 51243.1015625,
+      "changePercent": -0.5399316180631669
     },
     "^N225": {
-      "price": 70035.7109375,
-      "changePercent": -0.9171323636931947
+      "price": 70683.9765625,
+      "changePercent": null
     },
     "^HSI": {
-      "price": 24130.5,
-      "changePercent": -0.6180275228213928
+      "price": 24280.560546875,
+      "changePercent": null
     },
     "^STOXX50E": {
-      "price": 6164.93017578125,
-      "changePercent": -1.7107122191249917
+      "price": 6180.2900390625,
+      "changePercent": -1.4658254192295888
     },
     "^GDAXI": {
-      "price": 25055.6796875,
-      "changePercent": -1.5462565766576093
+      "price": 25104.359375,
+      "changePercent": -1.3549746987429379
     },
     "^VIX": {
-      "price": 15.850000381469727,
-      "changePercent": 5.596270085136875
+      "price": 15.260000228881836,
+      "changePercent": 1.6655562704053577
     },
     "^VVIX": {
-      "price": 86.5999984741211,
-      "changePercent": 4.855312161323781
+      "price": 84.77999877929688,
+      "changePercent": 2.65165581609491
     },
     "DX-Y.NYB": {
-      "price": 102.39399719238281,
-      "changePercent": 0.5538597183410101
+      "price": 102.24800109863281,
+      "changePercent": 0.4104873417086098
     },
     "ES=F": {
-      "price": 7823.5,
-      "changePercent": -0.6413512827025655
+      "price": 7851.75,
+      "changePercent": -0.2825755651511303
     },
     "NQ=F": {
-      "price": 31221.75,
-      "changePercent": -0.8306003986246655
+      "price": 31363.25,
+      "changePercent": -0.38115505864229393
     },
     "YM=F": {
-      "price": 51264.0,
-      "changePercent": -1.0653080129689672
+      "price": 51491.0,
+      "changePercent": -0.6272193916936853
     },
     "NKD=F": {
-      "price": 69335.0,
-      "changePercent": -2.2004372663798577
+      "price": 69890.0,
+      "changePercent": -1.4175893927639467
     },
     "6E=F": {
-      "price": 1.1209499835968018,
-      "changePercent": -0.5015128130407722
+      "price": 1.1229499578475952,
+      "changePercent": -0.323989805521466
     },
     "ZN=F": {
-      "price": 104.28125,
-      "changePercent": -0.20933014354066987
+      "price": 104.484375,
+      "changePercent": -0.014952153110047847
     },
     "GC=F": {
-      "price": 4125.7001953125,
-      "changePercent": -1.466406365066813
+      "price": 4146.5,
+      "changePercent": -0.9696471712958595
     },
     "CL=F": {
-      "price": 89.94000244140625,
-      "changePercent": 0.559033974006831
+      "price": 88.56999969482422,
+      "changePercent": -0.9727221856372216
     },
     "BTC=F": {
-      "price": 83220.0,
-      "changePercent": -3.0747728860936405
+      "price": 83765.0,
+      "changePercent": -2.4400186349871884
     }
   },
   "treasury_rates": {
