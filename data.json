@@ -1,117 +1,117 @@
 {
-  "generated_at": "2026-10-27T10:24:12.971087+00:00",
+  "generated_at": "2026-10-29T14:10:41.406055+00:00",
   "prices": {
     "SPY": {
-      "price": 765.3699951171875,
-      "changePercent": 0.7105576038835313
+      "price": 768.2755737304688,
+      "changePercent": -0.5223839961775084
     },
     "QQQ": {
-      "price": 712.2000122070312,
-      "changePercent": 1.1073236119571366
+      "price": 714.4600219726562,
+      "changePercent": -1.5366331230273829
     },
     "XLK": {
-      "price": 186.32000732421875,
-      "changePercent": 1.6864114330245907
+      "price": 188.55999755859375,
+      "changePercent": -1.277488189217932
     },
     "XLF": {
-      "price": 56.02000045776367,
-      "changePercent": 0.21466713525796974
+      "price": 57.099998474121094,
+      "changePercent": 1.7281264698868295
     },
     "XLE": {
-      "price": 69.63999938964844,
-      "changePercent": 0.4471333483434211
+      "price": 68.81999969482422,
+      "changePercent": 0.5405445771777101
     },
     "^GSPC": {
-      "price": 7676.77001953125,
-      "changePercent": 0.6963807836358971
+      "price": 7707.830078125,
+      "changePercent": -0.4668129622613231
     },
     "^NDX": {
-      "price": 29273.400390625,
-      "changePercent": 1.0908081643004253
+      "price": 29375.53515625,
+      "changePercent": -1.4678920238794504
     },
     "^DJI": {
-      "price": 52361.578125,
-      "changePercent": 0.28041275428794066
+      "price": 52306.8203125,
+      "changePercent": -0.3206878023848513
     },
     "^N225": {
-      "price": 63268.37109375,
-      "changePercent": 1.7345694715320765
+      "price": 64659.46875,
+      "changePercent": 1.102785178331683
     },
     "^HSI": {
-      "price": 23041.3203125,
-      "changePercent": -0.734497785214575
+      "price": 22958.650390625,
+      "changePercent": -0.5896544249917945
     },
     "^STOXX50E": {
-      "price": 6109.81005859375,
-      "changePercent": -0.10496534459137483
+      "price": 6206.31005859375,
+      "changePercent": 0.6242085867472049
     },
     "^GDAXI": {
-      "price": 25393.5703125,
-      "changePercent": -0.06796127698332481
+      "price": 26049.439453125,
+      "changePercent": 1.3438362099556111
     },
     "^VIX": {
-      "price": 18.31999969482422,
-      "changePercent": -0.38064000623959204
+      "price": 17.010000228881836,
+      "changePercent": 0.5913683168071141
     },
     "^VVIX": {
-      "price": 101.43000030517578,
-      "changePercent": -7.538739173318566
+      "price": 96.26000213623047,
+      "changePercent": -0.36227975562562215
     },
     "DX-Y.NYB": {
-      "price": 102.22799682617188,
-      "changePercent": 0.26284596322640785
+      "price": 102.22699737548828,
+      "changePercent": 0.036202107053714405
     },
     "ES=F": {
-      "price": 7710.5,
-      "changePercent": -0.05185041156264178
+      "price": 7748.5,
+      "changePercent": -0.4464715896315806
     },
     "NQ=F": {
-      "price": 29411.0,
-      "changePercent": -0.08917273182787115
+      "price": 29555.25,
+      "changePercent": -1.4151336746776964
     },
     "YM=F": {
-      "price": 52562.0,
-      "changePercent": 0.022835394862036156
+      "price": 52496.0,
+      "changePercent": -0.3795354486109003
     },
     "NKD=F": {
-      "price": 63645.0,
-      "changePercent": 1.2085552993559674
+      "price": 64615.0,
+      "changePercent": -0.6228852660719778
     },
     "6E=F": {
-      "price": 1.1165499687194824,
-      "changePercent": -0.2412410333423865
+      "price": 1.1155500411987305,
+      "changePercent": -0.04479761284480223
     },
     "ZN=F": {
-      "price": 106.09375,
-      "changePercent": -0.014725371815638344
+      "price": 106.203125,
+      "changePercent": 0.38399054792497417
     },
     "GC=F": {
-      "price": 4010.5,
-      "changePercent": -0.6908652688793362
+      "price": 4035.300048828125,
+      "changePercent": -0.40231139389976256
     },
     "CL=F": {
-      "price": 102.41999816894531,
-      "changePercent": 0.6485809933762372
+      "price": 100.62000274658203,
+      "changePercent": -2.1015723471188976
     },
     "BTC=F": {
-      "price": 79395.0,
-      "changePercent": -0.6320400500625782
+      "price": 80515.0,
+      "changePercent": -1.2388837779822142
     }
   },
   "treasury_rates": {
-    "date": "2026-10-26",
-    "month1": 4.11,
-    "month2": 4.18,
-    "month3": 4.22,
-    "month6": 4.35,
+    "date": "2026-10-28",
+    "month1": 4.07,
+    "month2": 4.16,
+    "month3": 4.18,
+    "month6": 4.32,
     "year1": 4.47,
-    "year2": 4.68,
-    "year3": 4.79,
-    "year5": 4.84,
-    "year7": 4.91,
-    "year10": 5,
-    "year20": 5.35,
-    "year30": 5.31
+    "year2": 4.67,
+    "year3": 4.8,
+    "year5": 4.85,
+    "year7": 4.95,
+    "year10": 5.05,
+    "year20": 5.41,
+    "year30": 5.37
   },
   "indicators": {
     "cpi_index": {
@@ -119,8 +119,8 @@
       "date": "2026-09-01"
     },
     "inflation_expectation": {
-      "value": 2.34,
-      "date": "2026-10-26"
+      "value": 2.38,
+      "date": "2026-10-28"
     },
     "fed_funds_rate": {
       "value": 3.75,
@@ -131,8 +131,8 @@
       "date": "2026-09-01"
     },
     "durable_goods": {
-      "value": 338458,
-      "date": "2026-08-01"
+      "value": 345371,
+      "date": "2026-09-01"
     },
     "unemployment_rate": {
       "value": 4.2,
@@ -165,16 +165,16 @@
       "date": "2026-09-01"
     },
     "building_permits": {
-      "value": 1400.0,
+      "value": 1398.0,
       "date": "2026-09-01"
     },
     "pce_price_index": {
-      "value": 131.579,
-      "date": "2026-08-01"
+      "value": 132.257,
+      "date": "2026-09-01"
     },
     "core_pce_price_index": {
-      "value": 130.455,
-      "date": "2026-08-01"
+      "value": 130.902,
+      "date": "2026-09-01"
     }
   },
   "pmi": {
@@ -185,16 +185,16 @@
     "sp_global_services_pmi": null
   },
   "gdpnow": {
-    "value": 3.4989,
+    "value": 3.2721,
     "date": "2026-07-01",
     "source": "FRED"
   },
   "calculated": {
-    "spread_2s10s_bps": 32,
-    "real_10y_rate": 2.66
+    "spread_2s10s_bps": 38,
+    "real_10y_rate": 2.67
   },
   "_errors": [
-    "fmp_calendar: failed after 3 attempts - 402 Client Error: Payment Required for url: https://financialmodelingprep.com/stable/economic-calendar?from=2026-08-28&to=2026-10-27&apikey=1sl3QShloEyZsFLZrVplMtbH5zdMmLUx",
+    "fmp_calendar: failed after 3 attempts - 402 Client Error: Payment Required for url: https://financialmodelingprep.com/stable/economic-calendar?from=2026-08-30&to=2026-10-29&apikey=1sl3QShloEyZsFLZrVplMtbH5zdMmLUx",
     "gdpnow: FMP calendar had no value, falling back to FRED",
     "ism_manufacturing_pmi: FMP calendar had no value, falling back to Bigdata Research Agent",
     "bigdata_ism_manufacturing_pmi: FALLBACK IN USE - value comes from a research agent, not structured market data",
