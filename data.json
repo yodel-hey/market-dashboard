@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-01T14:14:40.299277+00:00",
+  "generated_at": "2026-11-01T18:24:18.962148+00:00",
   "prices": {
     "SPY": {
       "price": 755.719970703125,
@@ -94,8 +94,8 @@
       "changePercent": null
     },
     "BTC=F": {
-      "price": 78115.0,
-      "changePercent": 0.8338819398727233
+      "price": 76970.0,
+      "changePercent": -0.6441286191896114
     }
   },
   "treasury_rates": {
