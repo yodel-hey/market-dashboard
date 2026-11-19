@@ -1,117 +1,117 @@
 {
-  "generated_at": "2026-11-19T14:18:06.522727+00:00",
+  "generated_at": "2026-11-19T21:26:57.599295+00:00",
   "prices": {
     "SPY": {
-      "price": 730.2000122070312,
-      "changePercent": -0.3058257641456707
+      "price": 715.8699951171875,
+      "changePercent": -1.962478341589072
     },
     "QQQ": {
-      "price": 659.510009765625,
-      "changePercent": 0.38967920100852244
+      "price": 645.0399780273438,
+      "changePercent": -2.1940579405949534
     },
     "XLK": {
-      "price": 163.80999755859375,
-      "changePercent": 0.33688782939091855
+      "price": 160.67999267578125,
+      "changePercent": -1.9107532687026128
     },
     "XLF": {
-      "price": 56.41999816894531,
-      "changePercent": -1.1389548437966017
+      "price": 55.58000183105469,
+      "changePercent": -1.488827304416638
     },
     "XLE": {
-      "price": 61.290000915527344,
-      "changePercent": -3.267044941420074
+      "price": 60.88999938964844,
+      "changePercent": -0.6526374937246395
     },
     "^GSPC": {
-      "price": 7323.6298828125,
-      "changePercent": -0.2302272838388908
+      "price": 7175.830078125,
+      "changePercent": -2.0181222570294652
     },
     "^NDX": {
-      "price": 27116.259765625,
-      "changePercent": 0.4239737962870069
+      "price": 26517.05078125,
+      "changePercent": -2.209777416038074
     },
     "^DJI": {
-      "price": 50198.171875,
-      "changePercent": -1.1057060527248175
+      "price": 49097.05859375,
+      "changePercent": -2.1935326330048746
     },
     "^N225": {
-      "price": 59444.2109375,
-      "changePercent": 0.711452437212016
+      "price": 59024.28125,
+      "changePercent": null
     },
     "^HSI": {
-      "price": 22841.619140625,
-      "changePercent": -1.945205934277037
+      "price": 23294.75,
+      "changePercent": null
     },
     "^STOXX50E": {
-      "price": 6171.81005859375,
-      "changePercent": 0.2830487097505901
+      "price": 6113.85986328125,
+      "changePercent": -0.6585587286006694
     },
     "^GDAXI": {
-      "price": 25732.400390625,
-      "changePercent": -0.014919987204934674
+      "price": 25463.810546875,
+      "changePercent": -1.0585450128652636
     },
     "^VIX": {
-      "price": 22.549999237060547,
-      "changePercent": -8.184040197839275
+      "price": 28.649999618530273,
+      "changePercent": 16.65309544594876
     },
     "^VVIX": {
-      "price": 118.37000274658203,
-      "changePercent": -2.399403085425818
+      "price": 128.4199981689453,
+      "changePercent": 8.490322876716734
     },
     "DX-Y.NYB": {
-      "price": 103.64900207519531,
-      "changePercent": -0.20315668584274987
+      "price": 103.91699981689453,
+      "changePercent": 0.05488080705565462
     },
     "ES=F": {
-      "price": 7414.5,
-      "changePercent": 1.0081057148695594
+      "price": 7186.25,
+      "changePercent": -2.101355493494993
     },
     "NQ=F": {
-      "price": 27671.75,
-      "changePercent": 1.7839572585910415
+      "price": 26528.0,
+      "changePercent": -2.423055348653296
     },
     "YM=F": {
-      "price": 50519.0,
-      "changePercent": 0.48932826765858417
+      "price": 49128.0,
+      "changePercent": -2.2775644978417837
     },
     "NKD=F": {
-      "price": 60060.0,
-      "changePercent": 2.0474046385183926
+      "price": 57835.0,
+      "changePercent": -1.733072806048764
     },
     "6E=F": {
-      "price": 1.1011500358581543,
-      "changePercent": 0.31429680691342204
+      "price": 1.0982500314712524,
+      "changePercent": 0.05010764890980026
     },
     "ZN=F": {
-      "price": 105.65625,
-      "changePercent": -0.11816838995568685
+      "price": 105.921875,
+      "changePercent": 0.1329394387001477
     },
     "GC=F": {
-      "price": 3713.699951171875,
-      "changePercent": -0.7536265508922855
+      "price": 3658.89990234375,
+      "changePercent": -2.2181245401036174
     },
     "CL=F": {
-      "price": 83.5199966430664,
-      "changePercent": 0.31226819621086854
+      "price": 83.16000366210938,
+      "changePercent": -0.12010385726086784
     },
     "BTC=F": {
-      "price": 63880.0,
-      "changePercent": 2.1834759657682157
+      "price": 61640.0,
+      "changePercent": -1.399664080620651
     }
   },
   "treasury_rates": {
-    "date": "2026-11-18",
-    "month1": 4.1,
-    "month2": 4.27,
+    "date": "2026-11-19",
+    "month1": 4.2,
+    "month2": 4.29,
     "month3": 4.34,
-    "month6": 4.43,
+    "month6": 4.42,
     "year1": 4.62,
-    "year2": 4.8,
-    "year3": 4.84,
-    "year5": 4.89,
-    "year7": 4.96,
-    "year10": 5.07,
-    "year20": 5.44,
-    "year30": 5.41
+    "year2": 4.76,
+    "year3": 4.81,
+    "year5": 4.86,
+    "year7": 4.94,
+    "year10": 5.04,
+    "year20": 5.43,
+    "year30": 5.4
   },
   "indicators": {
     "cpi_index": {
@@ -143,8 +143,8 @@
       "date": "2026-10-01"
     },
     "initial_claims": {
-      "value": 200000,
-      "date": "2026-11-07"
+      "value": 203000,
+      "date": "2026-11-14"
     },
     "housing_starts": {
       "value": 1309,
@@ -190,8 +190,8 @@
     "source": "FRED"
   },
   "calculated": {
-    "spread_2s10s_bps": 27,
-    "real_10y_rate": 2.88
+    "spread_2s10s_bps": 28,
+    "real_10y_rate": 2.85
   },
   "_errors": [
     "fmp_calendar: failed after 3 attempts - 402 Client Error: Payment Required for url: https://financialmodelingprep.com/stable/economic-calendar?from=2026-09-20&to=2026-11-19&apikey=1sl3QShloEyZsFLZrVplMtbH5zdMmLUx",
