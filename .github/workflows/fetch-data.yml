@@ -2,19 +2,25 @@ name: Fetch Market Data
 
 on:
   schedule:
-    # 7 specific trigger times per day, offset a few minutes past the hour
-    # (not :00) to avoid GitHub's documented top-of-the-hour congestion for
-    # scheduled workflows. Each corresponds to a CT target time - see the
-    # Python script's ACTIVE_TIMES for the source of truth. These are UTC
-    # clock times tied to the current CDT (UTC-5) offset; they will drift by
-    # 1 hour once Daylight Saving ends in autumn and need updating then.
-    - cron: '8 6 * * *'    # 00:08 CT
-    - cron: '9 8 * * *'    # 02:09 CT
-    - cron: '8 11 * * *'   # 05:08 CT
-    - cron: '9 14 * * *'   # 08:09 CT
-    - cron: '10 15 * * *'  # 09:10 CT
-    - cron: '9 18 * * *'   # 12:09 CT
-    - cron: '11 21 * * *'  # 15:11 CT
+        # Beide Zeitsätze (Sommer = CDT/UTC-5, Winter = CST/UTC-6) sind aktiv.
+    # Das Python-Skript prüft die Chicago-Zeit (ACTIVE_TIMES) und beendet sich
+    # sofort, wenn der Lauf nicht zu einer Zielzeit passt. Nie mehr umstellen.
+    # Sommerzeit
+    - cron: '8 5 * * *'    # 00:08 CDT
+    - cron: '9 7 * * *'    # 02:09 CDT
+    - cron: '8 10 * * *'   # 05:08 CDT
+    - cron: '9 13 * * *'   # 08:09 CDT
+    - cron: '10 14 * * *'  # 09:10 CDT
+    - cron: '9 17 * * *'   # 12:09 CDT
+    - cron: '11 20 * * *'  # 15:11 CDT
+    # Winterzeit
+    - cron: '8 6 * * *'    # 00:08 CST
+    - cron: '9 8 * * *'    # 02:09 CST
+    - cron: '8 11 * * *'   # 05:08 CST
+    - cron: '9 14 * * *'   # 08:09 CST
+    - cron: '10 15 * * *'  # 09:10 CST
+    - cron: '9 18 * * *'   # 12:09 CST
+    - cron: '11 21 * * *'  # 15:11 CST
   workflow_dispatch:
     inputs:
       force_run:
