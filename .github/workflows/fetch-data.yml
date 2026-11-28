@@ -8,13 +8,13 @@ on:
     # Python script's ACTIVE_TIMES for the source of truth. These are UTC
     # clock times tied to the current CDT (UTC-5) offset; they will drift by
     # 1 hour once Daylight Saving ends in autumn and need updating then.
-    - cron: '8 5 * * *'    # 00:08 CT
-    - cron: '9 7 * * *'    # 02:09 CT
-    - cron: '8 10 * * *'   # 05:08 CT
-    - cron: '9 13 * * *'   # 08:09 CT
-    - cron: '10 14 * * *'  # 09:10 CT
-    - cron: '9 17 * * *'   # 12:09 CT
-    - cron: '11 20 * * *'  # 15:11 CT
+    - cron: '8 6 * * *'    # 00:08 CT
+    - cron: '9 8 * * *'    # 02:09 CT
+    - cron: '8 11 * * *'   # 05:08 CT
+    - cron: '9 14 * * *'   # 08:09 CT
+    - cron: '10 15 * * *'  # 09:10 CT
+    - cron: '9 18 * * *'   # 12:09 CT
+    - cron: '11 21 * * *'  # 15:11 CT
   workflow_dispatch:
     inputs:
       force_run:
